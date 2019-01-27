@@ -96,30 +96,32 @@
 
 
 
-  <meta name="description" content="视频的本质是什么？   视频是连续的图像，视频由多幅图像构成，包含对象的运动信息，又称为运动图像。  视频有哪几种采样？   视频从时间和空间两个维度进行采样。  时间采样    度量：   帧率：帧/秒     空间采样   度量：   解析度/分辨率（Resolution）       什么是人类视觉系统HVS？   HVS是由一下器官组成的：  眼睛 神经 大脑 HVS特点：  对高频信息">
-<meta name="keywords" content="音视频,编解码">
+  <meta name="description" content="单变量线性回归 什么是回归分析?   回归分析（Regression Analysis）是一种统计学上分析数据的方法，目的在于了解两个或多个变量间是否相关、相关方向与强度，并建立数学模型以便观察特定变量来预测研究者感兴趣的变量。更具体的来说，回归分析可以帮助人们了解在只有一个自变量变化时因变量的变化量。一般来说，通过回归分析我们可以由给出的自变量估计因变量的条件期望。  什么是线性回归？   线性">
+<meta name="keywords" content="机器学习,算法,线性回归">
 <meta property="og:type" content="article">
-<meta property="og:title" content="视频编解码学习二：视频表示基础">
-<meta property="og:url" content="https://thinkerleolee.github.io/2019/01/27/视频编解码学习二：视频表示基础/index.html">
+<meta property="og:title" content="机器学习算法：单变量线性回归">
+<meta property="og:url" content="https://thinkerleolee.github.io/2019/01/28/线性模型：单变量线性回归/index.html">
 <meta property="og:site_name" content="Thinkerleo">
-<meta property="og:description" content="视频的本质是什么？   视频是连续的图像，视频由多幅图像构成，包含对象的运动信息，又称为运动图像。  视频有哪几种采样？   视频从时间和空间两个维度进行采样。  时间采样    度量：   帧率：帧/秒     空间采样   度量：   解析度/分辨率（Resolution）       什么是人类视觉系统HVS？   HVS是由一下器官组成的：  眼睛 神经 大脑 HVS特点：  对高频信息">
+<meta property="og:description" content="单变量线性回归 什么是回归分析?   回归分析（Regression Analysis）是一种统计学上分析数据的方法，目的在于了解两个或多个变量间是否相关、相关方向与强度，并建立数学模型以便观察特定变量来预测研究者感兴趣的变量。更具体的来说，回归分析可以帮助人们了解在只有一个自变量变化时因变量的变化量。一般来说，通过回归分析我们可以由给出的自变量估计因变量的条件期望。  什么是线性回归？   线性">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce56adf42.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce56ce8ec.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce56f16be.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce56ceae5.png">
-<meta property="og:updated_time" content="2019-01-27T15:56:38.008Z">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4dde2865e7b.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4dde80ca5be.png">
+<meta property="og:image" content="https://thinkerleolee.github.io/2019/01/28/pic/梯度下降-山.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4dde80c8947.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4dde80e8441.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4dde809da57.jpg">
+<meta property="og:updated_time" content="2019-01-27T16:41:44.429Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="视频编解码学习二：视频表示基础">
-<meta name="twitter:description" content="视频的本质是什么？   视频是连续的图像，视频由多幅图像构成，包含对象的运动信息，又称为运动图像。  视频有哪几种采样？   视频从时间和空间两个维度进行采样。  时间采样    度量：   帧率：帧/秒     空间采样   度量：   解析度/分辨率（Resolution）       什么是人类视觉系统HVS？   HVS是由一下器官组成的：  眼睛 神经 大脑 HVS特点：  对高频信息">
-<meta name="twitter:image" content="https://i.loli.net/2019/01/27/5c4dce56adf42.png">
+<meta name="twitter:title" content="机器学习算法：单变量线性回归">
+<meta name="twitter:description" content="单变量线性回归 什么是回归分析?   回归分析（Regression Analysis）是一种统计学上分析数据的方法，目的在于了解两个或多个变量间是否相关、相关方向与强度，并建立数学模型以便观察特定变量来预测研究者感兴趣的变量。更具体的来说，回归分析可以帮助人们了解在只有一个自变量变化时因变量的变化量。一般来说，通过回归分析我们可以由给出的自变量估计因变量的条件期望。  什么是线性回归？   线性">
+<meta name="twitter:image" content="https://i.loli.net/2019/01/28/5c4dde2865e7b.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://thinkerleolee.github.io/2019/01/27/视频编解码学习二：视频表示基础/">
+  <link rel="canonical" href="https://thinkerleolee.github.io/2019/01/28/线性模型：单变量线性回归/">
 
 
 
@@ -129,7 +131,7 @@
   };
 </script>
 
-  <title>视频编解码学习二：视频表示基础 | Thinkerleo</title>
+  <title>机器学习算法：单变量线性回归 | Thinkerleo</title>
   
 
 
@@ -345,7 +347,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/01/27/视频编解码学习二：视频表示基础/">
+    <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/01/28/线性模型：单变量线性回归/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Thinkerleo">
@@ -362,7 +364,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">视频编解码学习二：视频表示基础
+          <h1 class="post-title" itemprop="name headline">机器学习算法：单变量线性回归
 
               
             
@@ -388,7 +390,7 @@
                 
               
 
-              <time title="Created: 2019-01-27 23:30:07 / Modified: 23:56:38" itemprop="dateCreated datePublished" datetime="2019-01-27T23:30:07+08:00">2019-01-27</time>
+              <time title="Created: 2019-01-28 00:30:07 / Modified: 00:41:44" itemprop="dateCreated datePublished" datetime="2019-01-28T00:30:07+08:00">2019-01-28</time>
             
 
             
@@ -410,7 +412,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/音视频开发/" itemprop="url" rel="index"><span itemprop="name">音视频开发</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
 
                 
                 
@@ -445,58 +447,58 @@
       
 
       
-        <ul>
-<li><p><strong>视频的本质是什么？</strong></p>
-<p>  视频是连续的图像，视频由多幅图像构成，包含对象的运动信息，又称为运动图像。</p>
+        <h2 id="单变量线性回归"><a href="#单变量线性回归" class="headerlink" title="单变量线性回归"></a>单变量线性回归</h2><ul>
+<li><p><strong>什么是回归分析?</strong></p>
+<p>  回归分析（Regression Analysis）是一种统计学上分析数据的方法，目的在于了解两个或多个变量间是否相关、相关方向与强度，并建立数学模型以便观察特定变量来预测研究者感兴趣的变量。更具体的来说，回归分析可以帮助人们了解在只有一个自变量变化时因变量的变化量。一般来说，通过回归分析我们可以由给出的自变量估计因变量的条件期望。</p>
 </li>
-<li><p><strong>视频有哪几种采样？</strong></p>
-<p>  视频从时间和空间两个维度进行采样。</p>
-<ul>
-<li><p>时间采样 </p>
-<p>  度量：</p>
-<p>  帧率：帧/秒</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce56adf42.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56adf42.png" alt="20190126152938.png"></a></p>
+<li><p><strong>什么是线性回归？</strong></p>
+<p>  线性回归（Linear regression）是利用称为线性回归方程的最小平方函數对一个或多个自变量和因变量之间关系进行建模的一种回归分析。 这种函数是一个或多个称为回归系数的模型参数的线性组合。 只有一个自变量的情况称为简单回归，大于一个自变量情况的叫做多元回归。</p>
 </li>
-<li><p>空间采样</p>
-<p>  度量：</p>
-<p>  解析度/分辨率（Resolution）</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce56ce8ec.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56ce8ec.png" alt="20190126153053.png"></a></p>
+<li><p><strong>Andrew Ng课程中对于监督学习算法的表示是什么？</strong></p>
+<p>  $m$代表训练集中实例的数量</p>
+<p>  $x$代表特征/输入变量</p>
+<p>  $y$代表目标变量/输出变量</p>
+<p>  $(x,y)$代表训练集中的实例</p>
+<p>  $(x^{(i)},y^{(i)})$代表第$i$个观察实例</p>
+<p>  $h$代表学习算法的解决方案或函数成为假设。</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4dde2865e7b.png" alt="监督学习模型.png"></p>
 </li>
-</ul>
-</li>
-<li><p><strong>什么是人类视觉系统HVS？</strong></p>
-<p>  HVS是由一下器官组成的：</p>
-<ul>
-<li>眼睛</li>
-<li>神经</li>
-<li><p>大脑</p>
-<p>HVS特点：</p>
-</li>
-<li>对高频信息不敏感</li>
-<li>对高对比度更敏感</li>
-<li>对亮度信息比色度信息更敏感</li>
-<li>对运动的信息更敏感</li>
-</ul>
-</li>
-<li><p><strong>什么是RGB色彩空间？</strong></p>
-<ul>
-<li><p>三原色：红（R），绿（G），蓝（B）。</p>
-<p>任何颜色都可以通过按一定比例混合三原色产生。</p>
-<p>RGB色度空间<br>由RGB三原色组成<br>广泛用于BMP，TIFF，PPM等</p>
-<p>每个色度成分通常用8bit表示[0,255]/[0,ffff]</p>
-<p><a href="https://i.loli.net/2019/01/27/5c4dce56f16be.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56f16be.png" alt="201207290832374305.png"></a></p>
+<li><p><strong>单变量线性回归的数学表示是什么?</strong></p>
+<p>  假设函数：</p>
+<script type="math/tex; mode=display">
+      h_\theta(x)=\theta_0+\theta_1x</script><p>  其中$\theta_0、\theta_1$是参数</p>
+<p>  代价函数：</p>
+<script type="math/tex; mode=display">
+      J(\theta_0,\theta_1)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2</script><p>  我们的目的是使得代价函数$J(\theta_0,\theta_1)$取得最小值</p>
+<p>  也就是求 $minimize~J(\theta_0, \theta_1)$</p>
 </li>
 </ul>
-</li>
-<li><p><strong>什么是YUV色彩空间？</strong></p>
 <ul>
-<li>Y：亮度分量，其实Y就是图像的灰度值</li>
-<li><p>UV：两个色度分量</p>
-<p>YUV更好的反映HVS特点</p>
-<p><strong>RGB转化到YUV空间</strong>:</p>
-<p><a href="https://i.loli.net/2019/01/27/5c4dce56ceae5.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56ceae5.png" alt="20190126160638.png"></a></p>
+<li><p><strong>那么。。怎么求$minimize~J(\theta_0, \theta_1)$呢？</strong></p>
+<p>  $minimize~J(\theta_0, \theta_1)$的图像，大概是这个样子的：</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4dde80ca5be.png" alt="代价函数图像.png"></p>
+<p>  这时候，我们就要请出<strong>梯度下降</strong>法了。梯度下降在之前数学基础中有相关的内容。</p>
+<p>  <img src="..\pic\梯度下降-山.jpg" alt=""></p>
+<p>  想象一下你正站立在山的这一点上，站立在你想象的公园这座红色山上，在梯度下降算法中，我们要做的就是旋转360度，看看我们的周围，并问自己要在某个方向上，用小碎步尽快下山。这些小碎步需要朝什么方向？如果我们站在山坡上的这一点，你看一下周围，你会发现最佳的下山方向，你再看看周围，然后再一次想想，我应该从什么方向迈着小碎步下山？然后你按照自己的判断又迈出一步，重复上面的步骤，从这个新的点，你环顾四周，并决定从什么方向将会最快下山，然后又迈进了一小步，并依此类推，直到你接近局部最低点的位置。</p>
+<p>  <strong>简而言之，就是小碎步下山，每一步都选出下山最快的那个方向迈步子。</strong></p>
+<p>  Andrew Ng对梯度下降的算法公式定义是：</p>
+<p>  repeat until convergence<br>  {</p>
+<script type="math/tex; mode=display">
+  \theta_j := \theta_j-\alpha\frac{\alpha}{\alpha\theta_j}J(\theta_0,\theta_1)~~~~(for~j=0~and~j=1)</script><p>  }</p>
+<p>  <strong>其中a是学习率（learning rate），它决定了我们沿着能让代价函数下降程度最大的方向向下迈出的步子有多大，在批量梯度下降中，我们每一次都同时让所有的参数减去学习速率乘以代价函数的导数。</strong></p>
+<p>  注意在小步迭代中，参数要<strong>同步更新</strong></p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4dde80c8947.png" alt="梯度下降-同步更新.png"></p>
+<p>  对于求 $minimize~J(\theta_0, \theta_1)$，用梯度下降法就是：</p>
+<p>  repeat until convergence{</p>
+<p>  $\theta_0:=\theta_0-\alpha\frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})$</p>
+<p>  $\theta_1:=\theta_1-\alpha\frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})\cdot x^{i}$</p>
+<p>  }</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4dde80e8441.png" alt="代价函数-梯度下降求值.png"></p>
+<p>  其中蓝框和红框中的就是对参数求偏微分的结果。</p>
 </li>
-</ul>
+<li><p><strong>梯度下降为什么会陷入局部最优解的问题？</strong></p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4dde809da57.jpg" alt="梯度下降-山.jpg"></p>
+<p>  如图，在有多个局部最优解的时候，有时会得出不同的最优解结论</p>
 </li>
 </ul>
 
@@ -522,9 +524,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/音视频/" rel="tag"># 音视频</a>
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
           
-            <a href="/tags/编解码/" rel="tag"># 编解码</a>
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/线性回归/" rel="tag"># 线性回归</a>
           
         </div>
       
@@ -537,8 +541,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/27/视频编解码学习一：编解码理论基础/" rel="next" title="视频编解码学习一：编解码理论基础">
-                <i class="fa fa-chevron-left"></i> 视频编解码学习一：编解码理论基础
+              <a href="/2019/01/28/线性模型：Logistic回归/" rel="next" title="机器学习算法：Logistic回归">
+                <i class="fa fa-chevron-left"></i> 机器学习算法：Logistic回归
               </a>
             
           </div>
@@ -546,10 +550,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/28/线性模型：Logistic回归/" rel="prev" title="机器学习算法：Logistic回归">
-                机器学习算法：Logistic回归 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -594,8 +594,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -707,6 +716,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单变量线性回归"><span class="nav-number">1.</span> <span class="nav-text">单变量线性回归</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

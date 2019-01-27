@@ -336,7 +336,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/01/27/视频编解码学习一：编解码理论基础/">
+    <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/01/28/线性模型：单变量线性回归/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Thinkerleo">
@@ -356,7 +356,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/01/27/视频编解码学习一：编解码理论基础/" class="post-title-link" itemprop="url">视频编解码学习一：编解码理论基础</a>
+                <a href="/2019/01/28/线性模型：单变量线性回归/" class="post-title-link" itemprop="url">机器学习算法：单变量线性回归</a>
               
             
           </h1>
@@ -381,7 +381,7 @@
                 
               
 
-              <time title="Created: 2019-01-27 23:30:07 / Modified: 23:56:32" itemprop="dateCreated datePublished" datetime="2019-01-27T23:30:07+08:00">2019-01-27</time>
+              <time title="Created: 2019-01-28 00:30:07 / Modified: 00:41:44" itemprop="dateCreated datePublished" datetime="2019-01-28T00:30:07+08:00">2019-01-28</time>
             
 
             
@@ -403,7 +403,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/音视频开发/" itemprop="url" rel="index"><span itemprop="name">音视频开发</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
 
                 
                 
@@ -440,108 +440,303 @@
       
         
           
-            <ul>
-<li><p><strong>为什么要进行视频压缩？</strong></p>
-<p>  未经压缩的数字视频（原始数据）的数据量巨大导致的存储困难、传输困难。</p>
+            <h2 id="单变量线性回归"><a href="#单变量线性回归" class="headerlink" title="单变量线性回归"></a>单变量线性回归</h2><ul>
+<li><p><strong>什么是回归分析?</strong></p>
+<p>  回归分析（Regression Analysis）是一种统计学上分析数据的方法，目的在于了解两个或多个变量间是否相关、相关方向与强度，并建立数学模型以便观察特定变量来预测研究者感兴趣的变量。更具体的来说，回归分析可以帮助人们了解在只有一个自变量变化时因变量的变化量。一般来说，通过回归分析我们可以由给出的自变量估计因变量的条件期望。</p>
 </li>
-<li><p><strong>为什么能进行视频压缩？</strong></p>
-<p>  可以去除视频中的冗余信息</p>
-<ul>
-<li>空间冗余：图像相邻像素之间有较强的相关性</li>
-<li>时间冗余：视频序列的相邻图像之间内容相似</li>
-<li>编码冗余：不同像素值出现的概率不同</li>
-<li>视觉冗余：人的视觉系统对某些细节不敏感</li>
-<li>知识冗余：规律性的结构可由先验知识和背景知识得到</li>
-</ul>
+<li><p><strong>什么是线性回归？</strong></p>
+<p>  线性回归（Linear regression）是利用称为线性回归方程的最小平方函數对一个或多个自变量和因变量之间关系进行建模的一种回归分析。 这种函数是一个或多个称为回归系数的模型参数的线性组合。 只有一个自变量的情况称为简单回归，大于一个自变量情况的叫做多元回归。</p>
 </li>
-<li><p><strong>数据压缩分了几类？</strong></p>
-<ul>
-<li><p>无损压缩（Lossless）</p>
-<ul>
-<li><p>压缩前和解压缩后数据完全一致</p>
+<li><p><strong>Andrew Ng课程中对于监督学习算法的表示是什么？</strong></p>
+<p>  $m$代表训练集中实例的数量</p>
+<p>  $x$代表特征/输入变量</p>
+<p>  $y$代表目标变量/输出变量</p>
+<p>  $(x,y)$代表训练集中的实例</p>
+<p>  $(x^{(i)},y^{(i)})$代表第$i$个观察实例</p>
+<p>  $h$代表学习算法的解决方案或函数成为假设。</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4dde2865e7b.png" alt="监督学习模型.png"></p>
 </li>
-<li><p>压缩比比较低(2:1~3:1)</p>
-<p>无损压缩算法的代表为:gzip(数据)、APE(音频)、JPEG-LS（视频）</p>
-</li>
-</ul>
-</li>
-<li><p>有损压缩（Lossy）</p>
-<ul>
-<li><p>压缩前后数据不一致$X \neq X’$</p>
-</li>
-<li><p>压缩比高(10:1~20:1)</p>
-</li>
-<li><p>例如：MPEG-2，H.264/AVC，AVS</p>
-</li>
-</ul>
-<p><a href="https://i.loli.net/2019/01/27/5c4dce56edafc.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56edafc.png" alt="201207290832356582.png"></a></p>
-</li>
-<li><p><strong>那什么是编解码器呢？</strong></p>
-<ul>
-<li><p>编码器（Encoder）</p>
-<ul>
-<li>压缩信号的设备或程序</li>
-</ul>
-</li>
-<li><p>解码器（Decoder）</p>
-<ul>
-<li>解压缩信号的设备或程序</li>
-</ul>
-</li>
-<li><p>编解码器（Codec）</p>
-<ul>
-<li>编解码器对</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>编码器和解码器的一般工作过程是什么？</p>
-<ul>
-<li><p>编码器</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce5717f84.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce5717f84.png" alt="201207290832366059.png"></a></p>
-</li>
-<li><p>解码器</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce56eecc3.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56eecc3.png" alt="201207290832364663.png"></a></p>
-</li>
-</ul>
+<li><p><strong>单变量线性回归的数学表示是什么?</strong></p>
+<p>  假设函数：</p>
+<script type="math/tex; mode=display">
+      h_\theta(x)=\theta_0+\theta_1x</script><p>  其中$\theta_0、\theta_1$是参数</p>
+<p>  代价函数：</p>
+<script type="math/tex; mode=display">
+      J(\theta_0,\theta_1)=\frac{1}{2m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2</script><p>  我们的目的是使得代价函数$J(\theta_0,\theta_1)$取得最小值</p>
+<p>  也就是求 $minimize~J(\theta_0, \theta_1)$</p>
 </li>
 </ul>
 <ul>
-<li><p><strong>视频传输的QoS参数是什么</strong>？</p>
-<ul>
-<li><p>数据包的端到端的延迟</p>
+<li><p><strong>那么。。怎么求$minimize~J(\theta_0, \theta_1)$呢？</strong></p>
+<p>  $minimize~J(\theta_0, \theta_1)$的图像，大概是这个样子的：</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4dde80ca5be.png" alt="代价函数图像.png"></p>
+<p>  这时候，我们就要请出<strong>梯度下降</strong>法了。梯度下降在之前数学基础中有相关的内容。</p>
+<p>  <img src="..\pic\梯度下降-山.jpg" alt=""></p>
+<p>  想象一下你正站立在山的这一点上，站立在你想象的公园这座红色山上，在梯度下降算法中，我们要做的就是旋转360度，看看我们的周围，并问自己要在某个方向上，用小碎步尽快下山。这些小碎步需要朝什么方向？如果我们站在山坡上的这一点，你看一下周围，你会发现最佳的下山方向，你再看看周围，然后再一次想想，我应该从什么方向迈着小碎步下山？然后你按照自己的判断又迈出一步，重复上面的步骤，从这个新的点，你环顾四周，并决定从什么方向将会最快下山，然后又迈进了一小步，并依此类推，直到你接近局部最低点的位置。</p>
+<p>  <strong>简而言之，就是小碎步下山，每一步都选出下山最快的那个方向迈步子。</strong></p>
+<p>  Andrew Ng对梯度下降的算法公式定义是：</p>
+<p>  repeat until convergence<br>  {</p>
+<script type="math/tex; mode=display">
+  \theta_j := \theta_j-\alpha\frac{\alpha}{\alpha\theta_j}J(\theta_0,\theta_1)~~~~(for~j=0~and~j=1)</script><p>  }</p>
+<p>  <strong>其中a是学习率（learning rate），它决定了我们沿着能让代价函数下降程度最大的方向向下迈出的步子有多大，在批量梯度下降中，我们每一次都同时让所有的参数减去学习速率乘以代价函数的导数。</strong></p>
+<p>  注意在小步迭代中，参数要<strong>同步更新</strong></p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4dde80c8947.png" alt="梯度下降-同步更新.png"></p>
+<p>  对于求 $minimize~J(\theta_0, \theta_1)$，用梯度下降法就是：</p>
+<p>  repeat until convergence{</p>
+<p>  $\theta_0:=\theta_0-\alpha\frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})$</p>
+<p>  $\theta_1:=\theta_1-\alpha\frac{1}{m}\sum_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})\cdot x^{i}$</p>
+<p>  }</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4dde80e8441.png" alt="代价函数-梯度下降求值.png"></p>
+<p>  其中蓝框和红框中的就是对参数求偏微分的结果。</p>
 </li>
-<li><p>带宽：比特/秒   </p>
-</li>
-<li><p>数据包的流失率（丢包率）</p>
-</li>
-<li><p>数据包的延迟时间的波动</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>我们经常见到的.mov\.mp4\.rmvb这是指的是编码标准吗？</strong></p>
-<p>  不是，.mov等只是封装格式，封装了视频编码协议、音频编码协议等信息。</p>
-<p>  如下图所示：“变形金刚预告片_h1080p.mov”采用MPEG4的QuickTime封装格式（MOV），采用了H.264（AVC）的压缩编码标准。</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce571e18f.jpg" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce571e18f.jpg" alt="20140201115933359.jpg"></a></p>
-</li>
-</ul>
-<ul>
-<li><p><strong>那网上下载下来的视频播放流程是什么呢？</strong></p>
-<p>  视频播放器播放一个互联网上的视频文件，需要经过以下几个步骤：解协议，解封装，解码视音频，视音频同步。如果播放本地文件则不需要解协议，为以下几个步骤：解封装，解码视音频，视音频同步。他们的过程如图所示。</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce56e2eda.jpg" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56e2eda.jpg" alt="20140201120523046.jpg"></a></p>
-<p>  <strong>解协议</strong>的作用，就是将流媒体协议的数据，解析为标准的相应的封装格式数据。视音频在网络上传播的时候，常常采用各种流媒体协议，例如HTTP，RTMP，或是MMS等等。这些协议在传输视音频数据的同时，也会传输一些信令数据。这些信令数据包括对播放的控制（播放，暂停，停止），或者对网络状态的描述等。解协议的过程中会去除掉信令数据而只保留视音频数据。例如，采用RTMP协议传输的数据，经过解协议操作后，输出FLV格式的数据。</p>
-<p>  <strong>解封装</strong>的作用，就是将输入的封装格式的数据，分离成为音频流压缩编码数据和视频流压缩编码数据。封装格式种类很多，例如MP4，MKV，RMVB，TS，FLV，AVI等等，它的作用就是将已经压缩编码的视频数据和音频数据按照一定的格式放到一起。例如，FLV格式的数据，经过解封装操作后，输出H.264编码的视频码流和AAC编码的音频码流。</p>
-<p>  <strong>解码</strong>的作用，就是将视频/音频压缩编码数据，解码成为非压缩的视频/音频原始数据。音频的压缩编码标准包含AAC，MP3，AC-3等等，视频的压缩编码标准则包含H.264，MPEG2，VC-1等等。解码是整个系统中最重要也是最复杂的一个环节。通过解码，压缩编码的视频数据输出成为非压缩的颜色数据，例如YUV420P，RGB等等；压缩编码的音频数据输出成为非压缩的音频抽样数据，例如PCM数据。</p>
-<p>  <strong>视音频同步</strong>的作用，就是根据解封装模块处理过程中获取到的参数信息，同步解码出来的视频和音频数据，并将视频音频数据送至系统的显卡和声卡播放出来。</p>
-</li>
-<li><p><strong>目前主流的视频编码标准有什么呢？</strong></p>
-<p>  <img src="https://i.loli.net/2019/01/27/5c4dd01441be8.png" alt="TIM截图20190127233628.png"></p>
-<p>  图中H.264等仅仅是编码标准，而不是一个具体的编码器，H.264只是给编码器的实现提供参照用的。类似于C\C++和GCC的关系。</p>
+<li><p><strong>梯度下降为什么会陷入局部最优解的问题？</strong></p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4dde809da57.jpg" alt="梯度下降-山.jpg"></p>
+<p>  如图，在有多个局部最优解的时候，有时会得出不同的最优解结论</p>
 </li>
 </ul>
-<p><strong>整理自 雷霄骅 的Blog <a href="https://blog.csdn.net/leixiaohua1020" target="_blank" rel="noopener">https://blog.csdn.net/leixiaohua1020</a></strong></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/01/28/线性模型：Logistic回归/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Thinkerleo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/thinkerleo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Thinkerleo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/28/线性模型：Logistic回归/" class="post-title-link" itemprop="url">机器学习算法：Logistic回归</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-01-28 00:30:07 / Modified: 01:39:52" itemprop="dateCreated datePublished" datetime="2019-01-28T00:30:07+08:00">2019-01-28</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Logistic回归"><a href="#Logistic回归" class="headerlink" title="Logistic回归"></a>Logistic回归</h2><ul>
+<li><p><strong>Logistic回归算法解决了什么问题？公式表示是什么？</strong></p>
+<p>  Logistic回归事实上是一种分类算法，因为历史原因起名叫“回归”这两个字可能有点疑惑，但是它是种分类算法。</p>
+<p>  以肿瘤是否为恶性来说：</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4de0563df00.png" alt="逻辑回归-肿瘤-1.png"></p>
+<p>  1：是恶性肿瘤</p>
+<p>  0：是良性肿瘤</p>
+<p>  无论什么情况这个分类问题总是有：$0\leq h_{\theta}(x) \leq 1$</p>
+<p>  这个算法的性质是：<strong>它的输出值永远在0到 1 之间。</strong></p>
+<p>  所以，我们引入一个新的模型：<strong>逻辑回归模型（Logistic Regression）</strong></p>
+<p>  逻辑回归模型的假设是：</p>
+<p>   $h_\theta \left( x \right)=g\left(\theta^{T}X \right)$ </p>
+<p>   其中： $X$ 代表特征向量 $g$ 代表逻辑函数（logistic function)是一个常用的逻辑函数为S形函数（Sigmoid function），公式为： $g\left( z \right)=\frac{1} {1+{ {e}^{-z} } }$。</p>
+<p>  S形函数就是为了将回归模型函数的值域限制在$(0,1)$之间。</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4de05611f62.png" alt="逻辑回归公式.png"></p>
+</li>
+<li><p><strong>判定边界是什么？</strong></p>
+<p>  <strong>判定边界就是逻辑回归要求的最终目标。</strong></p>
+<p>  在逻辑回归中，我们预测：</p>
+<p>  当${h_\theta}\left( x \right)&gt;=0.5$时，预测 $y=1$。</p>
+<p>  当${h_\theta}\left( x \right)&lt;0.5$时，预测 $y=0$ 。</p>
+<p>  根据上面绘制出的 S 形函数图像，我们知道当</p>
+<p>  $z=0$ 时 $g(z)=0.5$</p>
+<p>  $z&gt;0$ 时 $g(z)&gt;0.5$</p>
+<p>  $z&lt;0$ 时 $g(z)&lt;0.5$</p>
+<p>  又 $z={\theta^{T} }x$ ，即： ${\theta^{T} }x&gt;=0$ 时，预测 $y=1$ ${\theta^{T} }x&lt;0$ 时，预测 $y=0$</p>
+</li>
+</ul>
+<pre><code>如下图，黄色线就是决策边界：
+
+线性判定边界：
+
+![逻辑回归-决策边界1.png](https://i.loli.net/2019/01/28/5c4de0565cae5.png)
+
+非线性判定边界：
+
+![逻辑回归-决策边界2.png](https://i.loli.net/2019/01/28/5c4de05655765.png)
+</code></pre><ul>
+<li><p><strong>逻辑回归的代价函数是什么？可以简化么？</strong></p>
+<p>  线性回归的代价函数为：$J\left( \theta \right)=\frac{1}{m}\sum\limits_{i=1}^{m}{\frac{1}{2}{ {\left( {h_\theta}\left({x}^{\left( i \right)} \right)-{y}^{\left( i \right)} \right)}^{2} } }$ 。</p>
+<p>  逻辑回归的代价函数为：</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4de0562d331.png" alt="逻辑回归-代价函数.png"></p>
+<p>  ${h_\theta}\left( x \right)$与 $Cost\left( {h_\theta}\left( x \right),y \right)$之间的关系如下图所示：</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4de05657f02.png" alt="逻辑回归-代价函数图像.png"></p>
+<p>  这样构建的$Cost\left( {h_\theta}\left( x \right),y \right)$函数的特点是：</p>
+<p>  当实际的 $y=1$ 且${h_\theta}\left( x \right)$也为 1 时误差为 0</p>
+<p>  当 $y=1$ 但${h_\theta}\left( x \right)$不为1时误差随着${h_\theta}\left( x \right)$变小而变大；</p>
+<p>  当实际的 $y=0$ 且${h_\theta}\left( x \right)$也为 0 时代价为 0</p>
+<p>  当$y=0$ 但${h_\theta}\left( x \right)$不为 0时误差随着 ${h_\theta}\left( x \right)$的变大而变大。 </p>
+<p>  将构建的 $Cost\left( {h_\theta}\left( x \right),y \right)$简化如下：</p>
+<p>  $Cost\left( {h_\theta}\left( x \right),y \right)=-y\times log\left( {h_\theta}\left( x \right) \right)-(1-y)\times log\left( 1-{h_\theta}\left( x \right) \right)$ 带入代价函数得到： $J\left( \theta \right)=\frac{1}{m}\sum\limits_{i=1}^{m}{[-{ {y}^{(i)} }\log \left( {h_\theta}\left( { {x}^{(i)} } \right) \right)-\left( 1-{ {y}^{(i)} } \right)\log \left( 1-{h_\theta}\left( { {x}^{(i)} } \right) \right)]}$ </p>
+<p>  <strong>即代价函数可以简化为：</strong>$J\left( \theta \right)=-\frac{1}{m}\sum\limits_{i=1}^{m}{[{ {y}^{(i)} }\log \left( {h_\theta}\left( { {x}^{(i)} } \right) \right)+\left( 1-{ {y}^{(i)} } \right)\log \left( 1-{h_\theta}\left( { {x}^{(i)} } \right) \right)]}$</p>
+</li>
+<li><p><strong>怎么用梯度下降法来求解$\theta？$</strong></p>
+<p>  在得到代价函数以后，我们便可以用梯度下降算法来求得能使代价函数最小的参数了。算法为：</p>
+<p>  Repeat {</p>
+<p>  $\theta_j := \theta_j - \alpha \frac{\partial}{\partial\theta_j} J(\theta)$ (simultaneously update all ) </p>
+<p>  }</p>
+<p>  求导后得到：</p>
+<p>  Repeat { </p>
+<p>  $\theta_j := \theta_j - \alpha \frac{1}{m}\sum\limits_{i=1}^{m}{ {\left( {h_\theta}\left( \mathop{x}^{\left( i \right)} \right)-\mathop{y}^{\left( i \right)} \right)} }\mathop{x}_{j}^{(i)}$ (simultaneously update all )</p>
+<p>  }</p>
+<p>  在这个视频中，我们定义了单训练样本的代价函数，凸性分析的内容是超出这门课的范围的，但是可以证明我们所选的代价值函数会给我们一个凸优化问题。代价函数$J(\theta)$会是一个凸函数，并且没有局部最优值。</p>
+</li>
+<li><p><strong>高级优化的算法？</strong></p>
+<p>  一些梯度下降算法之外的选择： 除了梯度下降算法以外，还有一些常被用来令代价函数最小的算法，这些<strong>算法更加复杂和优越</strong>，而且通常不需要人工选择学习率，通常比梯度下降算法要更加快速。</p>
+<p>  这些算法有：<strong>共轭梯度（Conjugate Gradient）</strong>，<strong>局部优化法(Broyden fletcher goldfarb shann,BFGS)</strong>和<strong>有限内存局部优化法(LBFGS)</strong> ，fminunc是 matlab和octave 中都带的一个最小值优化函数，使用时我们需要提供代价函数和每个参数的求导。，它们需要有一种方法来计算 $J\left( \theta \right)$，以及需要一种方法计算导数项，然后使用比梯度下降更复杂的算法来最小化代价函数。这三种算法的具体细节超出了本门课程的范畴。实际上你最后通常会花费很多天，或几周时间研究这些算法，你可以专门学一门课来提高数值计算能力，不过让我来告诉你他们的一些特性：</p>
+<p>  这三种算法有许多优点：</p>
+<p>  一个是使用这其中任何一个算法，你<strong>通常不需要手动选择学习率 $\alpha$</strong>，所以对于这些算法的一种思路是，给出计算导数项和代价函数的方法，你可以认为算法有一个智能的内部循环，而且，事实上，他们确实有一个智能的内部循环，称为线性搜索(line search)算法，它可以自动尝试不同的学习速率 $\alpha$，并自动选择一个好的学习速率 $a$，因此它甚至可以为每次迭代选择不同的学习速率，那么你就不需要自己选择。这些算法实际上在做更复杂的事情，不仅仅是选择一个好的学习速率，所以它们往往最终比梯度下降收敛得快多了，不过关于它们到底做什么的详细讨论，已经超过了本门课程的范围。</p>
+</li>
+<li><p><strong>当遇到多分类的时候怎么样操作算法？</strong></p>
+<p>  使用One-vs-all（一对多）方法可以有效解决这个问题。</p>
+<p>  我用3种不同的符号来代表3个类别，问题就是给出3个类型的数据集，我们如何得到一个学习算法来进行分类呢？</p>
+<p>  我们现在已经知道如何进行二元分类，可以使用逻辑回归，对于直线或许你也知道，可以将数据集一分为二为正类和负类。用一对多的分类思想，我们可以将其用在多类分类问题上。</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4de05652feb.png" alt="一对多.png"><br>  现在我们有一个训练集，好比上图表示的有3个类别，我们用三角形表示 $y=1$，方框表示$y=2$，叉叉表示 $y=3$。我们下面要做的就是使用一个训练集，将其分成3个二元分类问题。</p>
+<p>  我们先从用三角形代表的类别1开始，实际上我们可以创建一个，新的”伪”训练集，类型2和类型3定为负类，类型1设定为正类，我们创建一个新的训练集，如下图所示的那样，我们要拟合出一个合适的分类器。</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4de05660bd9.png" alt="一对多-2.png"></p>
+<p>  这里的三角形是正样本，而圆形代表负样本。可以这样想，设置三角形的值为1，圆形的值为0，下面我们来训练一个标准的逻辑回归分类器，这样我们就得到一个正边界。</p>
+<p>  为了能实现这样的转变，我们<strong>将多个类中的一个类标记为正向类（$y=1$）</strong>，然后<strong>将其他所有类都标记为负向类</strong>，这个模型记作$h_\theta^{\left( 1 \right)}\left( x \right)$。接着，类似地第我们选择另一个类标记为正向类（$y=2$），再将其它类都标记为负向类，将这个模型记作 $h_\theta^{\left( 2 \right)}\left( x \right)$,依此类推。 最后我们得到一系列的模型简记为： $h_\theta^{\left( i \right)}\left( x \right)=p\left( y=i|x;\theta \right)$其中：$i=\left( 1,2,3….k \right)$</p>
+<p>  最后，在我们需要做预测时，我们将所有的分类机都运行一遍，然后对每一个输入变量，都选择最高可能性的输出变量。</p>
+<p>  总之，我们已经把要做的做完了，现在要做的就是训练这个逻辑回归分类器：$h_\theta^{\left( i \right)}\left( x \right)$， 其中 $i$ 对应每一个可能的 $y=i$，最后，为了做出预测，我们给出输入一个新的 $x$ 值，用这个做预测。我们要做的就是在我们三个分类器里面输入 $x$，然后我们选择一个让 $h_\theta^{\left( i \right)}\left( x \right)$ 最大的$ i$，即<br>  $\mathop{\max}\limits_i,h_\theta^{\left( i \right)}\left( x \right)$。</p>
+</li>
+</ul>
 
           
         
@@ -812,6 +1007,268 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/01/27/视频编解码学习一：编解码理论基础/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Thinkerleo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/thinkerleo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Thinkerleo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/01/27/视频编解码学习一：编解码理论基础/" class="post-title-link" itemprop="url">视频编解码学习一：编解码理论基础</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-01-27 23:30:07 / Modified: 23:56:32" itemprop="dateCreated datePublished" datetime="2019-01-27T23:30:07+08:00">2019-01-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/音视频开发/" itemprop="url" rel="index"><span itemprop="name">音视频开发</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><p><strong>为什么要进行视频压缩？</strong></p>
+<p>  未经压缩的数字视频（原始数据）的数据量巨大导致的存储困难、传输困难。</p>
+</li>
+<li><p><strong>为什么能进行视频压缩？</strong></p>
+<p>  可以去除视频中的冗余信息</p>
+<ul>
+<li>空间冗余：图像相邻像素之间有较强的相关性</li>
+<li>时间冗余：视频序列的相邻图像之间内容相似</li>
+<li>编码冗余：不同像素值出现的概率不同</li>
+<li>视觉冗余：人的视觉系统对某些细节不敏感</li>
+<li>知识冗余：规律性的结构可由先验知识和背景知识得到</li>
+</ul>
+</li>
+<li><p><strong>数据压缩分了几类？</strong></p>
+<ul>
+<li><p>无损压缩（Lossless）</p>
+<ul>
+<li><p>压缩前和解压缩后数据完全一致</p>
+</li>
+<li><p>压缩比比较低(2:1~3:1)</p>
+<p>无损压缩算法的代表为:gzip(数据)、APE(音频)、JPEG-LS（视频）</p>
+</li>
+</ul>
+</li>
+<li><p>有损压缩（Lossy）</p>
+<ul>
+<li><p>压缩前后数据不一致$X \neq X’$</p>
+</li>
+<li><p>压缩比高(10:1~20:1)</p>
+</li>
+<li><p>例如：MPEG-2，H.264/AVC，AVS</p>
+</li>
+</ul>
+<p><a href="https://i.loli.net/2019/01/27/5c4dce56edafc.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56edafc.png" alt="201207290832356582.png"></a></p>
+</li>
+<li><p><strong>那什么是编解码器呢？</strong></p>
+<ul>
+<li><p>编码器（Encoder）</p>
+<ul>
+<li>压缩信号的设备或程序</li>
+</ul>
+</li>
+<li><p>解码器（Decoder）</p>
+<ul>
+<li>解压缩信号的设备或程序</li>
+</ul>
+</li>
+<li><p>编解码器（Codec）</p>
+<ul>
+<li>编解码器对</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>编码器和解码器的一般工作过程是什么？</p>
+<ul>
+<li><p>编码器</p>
+<p>  <a href="https://i.loli.net/2019/01/27/5c4dce5717f84.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce5717f84.png" alt="201207290832366059.png"></a></p>
+</li>
+<li><p>解码器</p>
+<p>  <a href="https://i.loli.net/2019/01/27/5c4dce56eecc3.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56eecc3.png" alt="201207290832364663.png"></a></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>视频传输的QoS参数是什么</strong>？</p>
+<ul>
+<li><p>数据包的端到端的延迟</p>
+</li>
+<li><p>带宽：比特/秒   </p>
+</li>
+<li><p>数据包的流失率（丢包率）</p>
+</li>
+<li><p>数据包的延迟时间的波动</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>我们经常见到的.mov\.mp4\.rmvb这是指的是编码标准吗？</strong></p>
+<p>  不是，.mov等只是封装格式，封装了视频编码协议、音频编码协议等信息。</p>
+<p>  如下图所示：“变形金刚预告片_h1080p.mov”采用MPEG4的QuickTime封装格式（MOV），采用了H.264（AVC）的压缩编码标准。</p>
+<p>  <a href="https://i.loli.net/2019/01/27/5c4dce571e18f.jpg" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce571e18f.jpg" alt="20140201115933359.jpg"></a></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>那网上下载下来的视频播放流程是什么呢？</strong></p>
+<p>  视频播放器播放一个互联网上的视频文件，需要经过以下几个步骤：解协议，解封装，解码视音频，视音频同步。如果播放本地文件则不需要解协议，为以下几个步骤：解封装，解码视音频，视音频同步。他们的过程如图所示。</p>
+<p>  <a href="https://i.loli.net/2019/01/27/5c4dce56e2eda.jpg" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56e2eda.jpg" alt="20140201120523046.jpg"></a></p>
+<p>  <strong>解协议</strong>的作用，就是将流媒体协议的数据，解析为标准的相应的封装格式数据。视音频在网络上传播的时候，常常采用各种流媒体协议，例如HTTP，RTMP，或是MMS等等。这些协议在传输视音频数据的同时，也会传输一些信令数据。这些信令数据包括对播放的控制（播放，暂停，停止），或者对网络状态的描述等。解协议的过程中会去除掉信令数据而只保留视音频数据。例如，采用RTMP协议传输的数据，经过解协议操作后，输出FLV格式的数据。</p>
+<p>  <strong>解封装</strong>的作用，就是将输入的封装格式的数据，分离成为音频流压缩编码数据和视频流压缩编码数据。封装格式种类很多，例如MP4，MKV，RMVB，TS，FLV，AVI等等，它的作用就是将已经压缩编码的视频数据和音频数据按照一定的格式放到一起。例如，FLV格式的数据，经过解封装操作后，输出H.264编码的视频码流和AAC编码的音频码流。</p>
+<p>  <strong>解码</strong>的作用，就是将视频/音频压缩编码数据，解码成为非压缩的视频/音频原始数据。音频的压缩编码标准包含AAC，MP3，AC-3等等，视频的压缩编码标准则包含H.264，MPEG2，VC-1等等。解码是整个系统中最重要也是最复杂的一个环节。通过解码，压缩编码的视频数据输出成为非压缩的颜色数据，例如YUV420P，RGB等等；压缩编码的音频数据输出成为非压缩的音频抽样数据，例如PCM数据。</p>
+<p>  <strong>视音频同步</strong>的作用，就是根据解封装模块处理过程中获取到的参数信息，同步解码出来的视频和音频数据，并将视频音频数据送至系统的显卡和声卡播放出来。</p>
+</li>
+<li><p><strong>目前主流的视频编码标准有什么呢？</strong></p>
+<p>  <img src="https://i.loli.net/2019/01/27/5c4dd01441be8.png" alt="TIM截图20190127233628.png"></p>
+<p>  图中H.264等仅仅是编码标准，而不是一个具体的编码器，H.264只是给编码器的实现提供参照用的。类似于C\C++和GCC的关系。</p>
+</li>
+</ul>
+<p><strong>整理自 雷霄骅 的Blog <a href="https://blog.csdn.net/leixiaohua1020" target="_blank" rel="noopener">https://blog.csdn.net/leixiaohua1020</a></strong></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/01/27/测试博客/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -985,7 +1442,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1000,7 +1457,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -1019,7 +1478,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -1234,6 +1701,10 @@
     
       
         
+      
+    
+      
+    
       
     
       
