@@ -96,14 +96,25 @@
 
 
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="简介WebRTC，中文全称网页即时通信（Web Real-Time Communication）的缩写，是一个支持网页浏览器进行实时语音对话或视频对话的API。它于2011年6月1日开源并在Google、Mozilla、Opera支持下被纳入万维网联盟的W3C推荐标准。 WebRTC除了是一套API标准，也是Google的一个对WebRTC标准API的实现（网址：https://webrtc.go">
+<meta property="og:type" content="article">
 <meta property="og:title" content="WebRTC简介与代码架构">
 <meta property="og:url" content="http://yoursite.com/2019/01/27/WebRTC简介与代码架构/index.html">
 <meta property="og:site_name" content="Thinkerleo">
+<meta property="og:description" content="简介WebRTC，中文全称网页即时通信（Web Real-Time Communication）的缩写，是一个支持网页浏览器进行实时语音对话或视频对话的API。它于2011年6月1日开源并在Google、Mozilla、Opera支持下被纳入万维网联盟的W3C推荐标准。 WebRTC除了是一套API标准，也是Google的一个对WebRTC标准API的实现（网址：https://webrtc.go">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-27T07:30:07.887Z">
+<meta property="og:image" content="https://img-blog.csdn.net/20180515195830885?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180515202651554?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180516095800359?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/2018051609585953?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180516095947847?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180516100458465?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180516100849253?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-01-27T07:39:34.938Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WebRTC简介与代码架构">
+<meta name="twitter:description" content="简介WebRTC，中文全称网页即时通信（Web Real-Time Communication）的缩写，是一个支持网页浏览器进行实时语音对话或视频对话的API。它于2011年6月1日开源并在Google、Mozilla、Opera支持下被纳入万维网联盟的W3C推荐标准。 WebRTC除了是一套API标准，也是Google的一个对WebRTC标准API的实现（网址：https://webrtc.go">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180515195830885?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 
 
 
@@ -362,9 +373,13 @@
                 
               
 
-              <time title="Created: 2019-01-27 15:30:07" itemprop="dateCreated datePublished" datetime="2019-01-27T15:30:07+08:00">2019-01-27</time>
+              <time title="Created: 2019-01-27 15:30:07 / Modified: 15:39:34" itemprop="dateCreated datePublished" datetime="2019-01-27T15:30:07+08:00">2019-01-27</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -397,7 +412,41 @@
       
 
       
-        
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>WebRTC，中文全称网页即时通信（Web Real-Time Communication）的缩写，是一个支持网页浏览器进行实时语音对话或视频对话的API。它于2011年6月1日开源并在Google、Mozilla、Opera支持下被纳入万维网联盟的W3C推荐标准。</p>
+<p>WebRTC除了是一套API标准，也是Google的一个对WebRTC标准API的实现（网址：<a href="https://webrtc.googlesource.com/src）。" target="_blank" rel="noopener">https://webrtc.googlesource.com/src）。</a></p>
+<p>我们主要讨论的是Google的WebRTC的NetWork I/O模块。</p>
+<h2 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h2><p><img src="https://img-blog.csdn.net/20180515195830885?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<h4 id="WebAPI：提供给Web开发者开发基于Web的类视频聊天应用程序的JavaScript-API"><a href="#WebAPI：提供给Web开发者开发基于Web的类视频聊天应用程序的JavaScript-API" class="headerlink" title="WebAPI：提供给Web开发者开发基于Web的类视频聊天应用程序的JavaScript API"></a>WebAPI：提供给Web开发者开发基于Web的类视频聊天应用程序的JavaScript API</h4><h4 id="WebRTC-C-API：一个C-开发的API层，提供给浏览器开发者使用来开发JavaScript-API"><a href="#WebRTC-C-API：一个C-开发的API层，提供给浏览器开发者使用来开发JavaScript-API" class="headerlink" title="WebRTC C++ API：一个C++开发的API层，提供给浏览器开发者使用来开发JavaScript API"></a>WebRTC C++ API：一个C++开发的API层，提供给浏览器开发者使用来开发JavaScript API</h4><h4 id="Transport-Session："><a href="#Transport-Session：" class="headerlink" title="Transport/Session："></a>Transport/Session：</h4><p> Session 组件是基于libjingle （会话协商 + NAT穿透组件库 <a href="https://developers.google.com/talk/libjingle/developer_guide）开发" target="_blank" rel="noopener">https://developers.google.com/talk/libjingle/developer_guide）开发</a></p>
+<ul>
+<li><p>RTP协议栈 ：（Real Time Protocol）</p>
+</li>
+<li><p>P2P（ICE + STUN + TURN）：用来实现点对点传输</p>
+</li>
+<li><p>Session Management： 用来建立\管理用户会话，这个层Google并没有在WebRTC中给出实现，而把决策权利给了WebRTC开发者。</p>
+</li>
+</ul>
+<h2 id="代码架构"><a href="#代码架构" class="headerlink" title="代码架构"></a>代码架构</h2><p>这里主要列出网络I/O相关部分的代码</p>
+<p>首先下载 WebRTC native代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://webrtc.googlesource.com/src</span><br></pre></td></tr></table></figure></p>
+<p><strong>之前的libjingle已经整合到了WebRTC项目中，主要由 rtc_base + pc + p2p 组成</strong><br><strong>注意：P2P的关键实现在客户端，libjingle只是客户端实现，TURN等server还得自己实现。</strong></p>
+<p>整体文件树：</p>
+<p><img src="https://img-blog.csdn.net/20180515202651554?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<ul>
+<li><strong>api</strong>：WebRTC C++ API，浏览器开发者调用的API<br><img src="https://img-blog.csdn.net/20180516095800359?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></li>
+<li><p><strong>sdk</strong>： 各个平台的sdk代码（Android &amp;&amp; IOS），用于视频采集、渲染等</p>
+</li>
+<li><p><strong>rtc_base</strong>：一些基础组件的封装代码（SOCKET、线程、事件、buffer、CRC校验等）</p>
+</li>
+<li><p><strong>p2p</strong>：P2P穿透相关，turn/stun等，服务器和客户端<br><img src="https://img-blog.csdn.net/2018051609585953?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdn.net/20180516095947847?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+<ul>
+<li><p><strong>pc</strong>：PeerConnection相关<br><img src="https://img-blog.csdn.net/20180516100458465?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+</li>
+<li><p><strong>system_wrappers</strong>：系统调用的封装<br><img src="https://img-blog.csdn.net/20180516100849253?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RoaW5rZXJsZW8xOTk3/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+</li>
+</ul>
+
       
     </div>
 
@@ -464,8 +513,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -511,6 +569,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整体架构"><span class="nav-number">2.</span> <span class="nav-text">整体架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#WebAPI：提供给Web开发者开发基于Web的类视频聊天应用程序的JavaScript-API"><span class="nav-number">2.0.1.</span> <span class="nav-text">WebAPI：提供给Web开发者开发基于Web的类视频聊天应用程序的JavaScript API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WebRTC-C-API：一个C-开发的API层，提供给浏览器开发者使用来开发JavaScript-API"><span class="nav-number">2.0.2.</span> <span class="nav-text">WebRTC C++ API：一个C++开发的API层，提供给浏览器开发者使用来开发JavaScript API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Transport-Session："><span class="nav-number">2.0.3.</span> <span class="nav-text">Transport/Session：</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#代码架构"><span class="nav-number">3.</span> <span class="nav-text">代码架构</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
