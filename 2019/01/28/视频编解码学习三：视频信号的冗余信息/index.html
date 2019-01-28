@@ -96,32 +96,28 @@
 
 
 
-  <meta name="description" content="为什么要进行视频压缩？   未经压缩的数字视频（原始数据）的数据量巨大导致的存储困难、传输困难。  为什么能进行视频压缩？   可以去除视频中的冗余信息  空间冗余：图像相邻像素之间有较强的相关性 时间冗余：视频序列的相邻图像之间内容相似 编码冗余：不同像素值出现的概率不同 视觉冗余：人的视觉系统对某些细节不敏感 知识冗余：规律性的结构可由先验知识和背景知识得到   数据压缩分了几类？  无损压">
+  <meta name="description" content="视频信号主要是哪两个方面的冗余？  数据冗余  图像的各像素之间存在着很强的相关性。消除这些冗余并不会导致信息损失，属于无损压缩。   冗余的数据主要有：  空间冗余 时间冗余 结构冗余 信息熵冗余 …   视觉冗余   人眼的一些特性比如亮度辨别阈值，视觉阈值，对亮度和色度的敏感度不同，使得在编码的时候引入适量的误差，也不会被察觉出来。可以利用人眼的视觉特性，以一定的客观失真换取数据压缩。这种">
 <meta name="keywords" content="音视频,编解码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="视频编解码学习一：编解码理论基础">
-<meta property="og:url" content="https://thinkerleolee.github.io/2019/01/27/视频编解码学习一：编解码理论基础/index.html">
+<meta property="og:title" content="视频编解码学习二：视频信号的冗余信息">
+<meta property="og:url" content="https://thinkerleolee.github.io/2019/01/28/视频编解码学习三：视频信号的冗余信息/index.html">
 <meta property="og:site_name" content="Thinkerleo">
-<meta property="og:description" content="为什么要进行视频压缩？   未经压缩的数字视频（原始数据）的数据量巨大导致的存储困难、传输困难。  为什么能进行视频压缩？   可以去除视频中的冗余信息  空间冗余：图像相邻像素之间有较强的相关性 时间冗余：视频序列的相邻图像之间内容相似 编码冗余：不同像素值出现的概率不同 视觉冗余：人的视觉系统对某些细节不敏感 知识冗余：规律性的结构可由先验知识和背景知识得到   数据压缩分了几类？  无损压">
+<meta property="og:description" content="视频信号主要是哪两个方面的冗余？  数据冗余  图像的各像素之间存在着很强的相关性。消除这些冗余并不会导致信息损失，属于无损压缩。   冗余的数据主要有：  空间冗余 时间冗余 结构冗余 信息熵冗余 …   视觉冗余   人眼的一些特性比如亮度辨别阈值，视觉阈值，对亮度和色度的敏感度不同，使得在编码的时候引入适量的误差，也不会被察觉出来。可以利用人眼的视觉特性，以一定的客观失真换取数据压缩。这种">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce56edafc.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce5717f84.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce56eecc3.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce571e18f.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce56e2eda.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dd01441be8.png">
-<meta property="og:updated_time" content="2019-01-28T03:14:43.777Z">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e94c5011b1.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e97ed6c038.png">
+<meta property="og:updated_time" content="2019-01-28T06:33:31.519Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="视频编解码学习一：编解码理论基础">
-<meta name="twitter:description" content="为什么要进行视频压缩？   未经压缩的数字视频（原始数据）的数据量巨大导致的存储困难、传输困难。  为什么能进行视频压缩？   可以去除视频中的冗余信息  空间冗余：图像相邻像素之间有较强的相关性 时间冗余：视频序列的相邻图像之间内容相似 编码冗余：不同像素值出现的概率不同 视觉冗余：人的视觉系统对某些细节不敏感 知识冗余：规律性的结构可由先验知识和背景知识得到   数据压缩分了几类？  无损压">
-<meta name="twitter:image" content="https://i.loli.net/2019/01/27/5c4dce56edafc.png">
+<meta name="twitter:title" content="视频编解码学习二：视频信号的冗余信息">
+<meta name="twitter:description" content="视频信号主要是哪两个方面的冗余？  数据冗余  图像的各像素之间存在着很强的相关性。消除这些冗余并不会导致信息损失，属于无损压缩。   冗余的数据主要有：  空间冗余 时间冗余 结构冗余 信息熵冗余 …   视觉冗余   人眼的一些特性比如亮度辨别阈值，视觉阈值，对亮度和色度的敏感度不同，使得在编码的时候引入适量的误差，也不会被察觉出来。可以利用人眼的视觉特性，以一定的客观失真换取数据压缩。这种">
+<meta name="twitter:image" content="https://i.loli.net/2019/01/28/5c4e94c5011b1.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://thinkerleolee.github.io/2019/01/27/视频编解码学习一：编解码理论基础/">
+  <link rel="canonical" href="https://thinkerleolee.github.io/2019/01/28/视频编解码学习三：视频信号的冗余信息/">
 
 
 
@@ -131,7 +127,7 @@
   };
 </script>
 
-  <title>视频编解码学习一：编解码理论基础 | Thinkerleo</title>
+  <title>视频编解码学习二：视频信号的冗余信息 | Thinkerleo</title>
   
 
 
@@ -347,7 +343,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/01/27/视频编解码学习一：编解码理论基础/">
+    <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/01/28/视频编解码学习三：视频信号的冗余信息/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Thinkerleo">
@@ -364,7 +360,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">视频编解码学习一：编解码理论基础
+          <h1 class="post-title" itemprop="name headline">视频编解码学习二：视频信号的冗余信息
 
               
             
@@ -390,24 +386,12 @@
                 
               
 
-              <time title="Created: 2019-01-27 23:40:07" itemprop="dateCreated datePublished" datetime="2019-01-27T23:40:07+08:00">2019-01-27</time>
+              <time title="Created: 2019-01-28 12:30:07 / Modified: 14:33:31" itemprop="dateCreated datePublished" datetime="2019-01-28T12:30:07+08:00">2019-01-28</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-01-28 11:14:43" itemprop="dateModified" datetime="2019-01-28T11:14:43+08:00">2019-01-28</time>
               
             
           </span>
@@ -460,106 +444,51 @@
 
       
         <ul>
-<li><p><strong>为什么要进行视频压缩？</strong></p>
-<p>  未经压缩的数字视频（原始数据）的数据量巨大导致的存储困难、传输困难。</p>
-</li>
-<li><p><strong>为什么能进行视频压缩？</strong></p>
-<p>  可以去除视频中的冗余信息</p>
+<li><p><strong>视频信号主要是哪两个方面的冗余？</strong></p>
 <ul>
-<li>空间冗余：图像相邻像素之间有较强的相关性</li>
-<li>时间冗余：视频序列的相邻图像之间内容相似</li>
-<li>编码冗余：不同像素值出现的概率不同</li>
-<li>视觉冗余：人的视觉系统对某些细节不敏感</li>
-<li>知识冗余：规律性的结构可由先验知识和背景知识得到</li>
+<li><p>数据冗余<br>  图像的各像素之间存在着很强的相关性。消除这些冗余并不会导致信息损失，属于<strong>无损压缩</strong>。</p>
+<p>  冗余的数据主要有：</p>
+<ul>
+<li>空间冗余</li>
+<li>时间冗余</li>
+<li>结构冗余</li>
+<li>信息熵冗余</li>
+<li>…</li>
 </ul>
 </li>
-<li><p><strong>数据压缩分了几类？</strong></p>
-<ul>
-<li><p>无损压缩（Lossless）</p>
-<ul>
-<li><p>压缩前和解压缩后数据完全一致</p>
-</li>
-<li><p>压缩比比较低(2:1~3:1)</p>
-<p>无损压缩算法的代表为:gzip(数据)、APE(音频)、JPEG-LS（视频）</p>
+<li><p>视觉冗余</p>
+<p>  人眼的一些特性比如亮度辨别阈值，视觉阈值，对亮度和色度的敏感度不同，使得在编码的时候引入适量的误差，也不会被察觉出来。可以利用人眼的视觉特性，以一定的客观失真换取数据压缩。这种压缩属于<strong>有损压缩</strong>。</p>
 </li>
 </ul>
 </li>
-<li><p>有损压缩（Lossy）</p>
+<li><p><strong>数据冗余主要有哪些，分别应该怎样理解？</strong></p>
 <ul>
-<li><p>压缩前后数据不一致$X \neq X’$</p>
+<li><p>空间冗余</p>
+<p>  一幅图像中，同一景色的表面采样点往往具有着空间连贯性。也就是说视频图像在水平方向相邻像素之间、垂直方向相邻像素点之间的变化一般都很小，存在着极强的空间相关性。</p>
+<p>  被离散数字量采样表示以后，这种空间连贯性就会产生一定的空间冗余。</p>
+<p>  规则物体和规则背景的表面物理特性都具有相关性，也就是说某些区域中所有点的光强和色彩以及饱和度都是相同的，因此数据有很大的空间冗余。常称为帧内相关性。</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4e94c5011b1.png" alt="TIM截图20190128133529.png"></p>
 </li>
-<li><p>压缩比高(10:1~20:1)</p>
+<li><p>时间冗余</p>
+<p>  视频是一些列连续的画面，但是在相邻帧或者相邻画面中，在对应位置的像素之间，亮度和色度信息存在着极强的相关性（如图），前后帧有着大量重复的地方，这就形成了时间冗余。</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4e97ed6c038.png" alt="TIM截图20190128134747.png"></p>
 </li>
-<li><p>例如：MPEG-2，H.264/AVC，AVS</p>
-</li>
-</ul>
-<p><a href="https://i.loli.net/2019/01/27/5c4dce56edafc.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56edafc.png" alt="201207290832356582.png"></a></p>
-</li>
-<li><p><strong>那什么是编解码器呢？</strong></p>
-<ul>
-<li><p>编码器（Encoder）</p>
-<ul>
-<li>压缩信号的设备或程序</li>
-</ul>
-</li>
-<li><p>解码器（Decoder）</p>
-<ul>
-<li>解压缩信号的设备或程序</li>
-</ul>
-</li>
-<li><p>编解码器（Codec）</p>
-<ul>
-<li>编解码器对</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>编码器和解码器的一般工作过程是什么？</p>
-<ul>
-<li><p>编码器</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce5717f84.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce5717f84.png" alt="201207290832366059.png"></a></p>
-</li>
-<li><p>解码器</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce56eecc3.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56eecc3.png" alt="201207290832364663.png"></a></p>
+<li><p>信息熵冗余</p>
+<p>  又称为符号冗余。信息熵指的是一组数据携带的平均信息量。</p>
 </li>
 </ul>
 </li>
 </ul>
 <ul>
-<li><p><strong>视频传输的QoS参数是什么</strong>？</p>
-<ul>
-<li><p>数据包的端到端的延迟</p>
-</li>
-<li><p>带宽：比特/秒   </p>
-</li>
-<li><p>数据包的流失率（丢包率）</p>
-</li>
-<li><p>数据包的延迟时间的波动</p>
+<li><p><strong>视觉冗余主要有哪些，分别应该怎样理解？</strong></p>
+<p>  事实表明，人类的视觉系统对于图像的敏感性是非均匀和非线性的，它并不能感知图像的所有变化，对视觉不敏感的信息可以适当地舍弃。然而，在记录原始的图像数据时，通常假定视觉系统是线性的和均匀的，对视觉敏感和不敏感的部分同等对待，从而产生了比理想编码(即把视觉敏感和不敏感的部分区分开来编码)更多的数据，当某些变化不能被视觉所感知，则忽略这些变化，我们仍认为图像是完好的。<strong>人类视觉系统的一般分辨能力估计为26灰度等级，而一般图像的量化采用28灰度等级。这些对视觉不敏感的数据，并不能对增加图象相对于人眼清晰度作出贡献，而被认为是多余的数据，这就是视觉冗余度。</strong></p>
+<p>  通过对人类视觉进行大量实验，发现了以下的视觉非均匀特性：视觉系统对图像的亮度和色彩度的敏感性相差很大。随着亮度的增加，视觉系统对量化误差的敏感度降低。这是由于人眼的辨别能力与物体周围的背景亮度成反比。<strong>由此说明：在高亮度区，灰度值的量化可以更粗糙一些。人眼的视觉系统把图像的边缘和非边缘区域分开来处理，这是将图像分成非边缘区域和边缘区域分别进行编码的主要依据</strong>。人类的视觉系统总是把视网膜上的图像分解成若干个空间有向的频率通道后再进一步处理。</p>
+<p>  同时，<strong>人眼对低频信号比对高频信号敏感；对静止图象比对运动图象敏感；对图象中水平和垂直线条比对斜线条敏感</strong>。</p>
+<p>  压缩视觉冗余度就是<strong>去掉那些相对人眼而言是看不到的或可有可无的图象数据，利用人眼的视觉特性进行压缩。</strong></p>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-<li><p><strong>我们经常见到的.mov\.mp4\.rmvb这是指的是编码标准吗？</strong></p>
-<p>  不是，.mov等只是封装格式，封装了视频编码协议、音频编码协议等信息。</p>
-<p>  如下图所示：“变形金刚预告片_h1080p.mov”采用MPEG4的QuickTime封装格式（MOV），采用了H.264（AVC）的压缩编码标准。</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce571e18f.jpg" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce571e18f.jpg" alt="20140201115933359.jpg"></a></p>
-</li>
-</ul>
-<ul>
-<li><p><strong>那网上下载下来的视频播放流程是什么呢？</strong></p>
-<p>  视频播放器播放一个互联网上的视频文件，需要经过以下几个步骤：解协议，解封装，解码视音频，视音频同步。如果播放本地文件则不需要解协议，为以下几个步骤：解封装，解码视音频，视音频同步。他们的过程如图所示。</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce56e2eda.jpg" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56e2eda.jpg" alt="20140201120523046.jpg"></a></p>
-<p>  <strong>解协议</strong>的作用，就是将流媒体协议的数据，解析为标准的相应的封装格式数据。视音频在网络上传播的时候，常常采用各种流媒体协议，例如HTTP，RTMP，或是MMS等等。这些协议在传输视音频数据的同时，也会传输一些信令数据。这些信令数据包括对播放的控制（播放，暂停，停止），或者对网络状态的描述等。解协议的过程中会去除掉信令数据而只保留视音频数据。例如，采用RTMP协议传输的数据，经过解协议操作后，输出FLV格式的数据。</p>
-<p>  <strong>解封装</strong>的作用，就是将输入的封装格式的数据，分离成为音频流压缩编码数据和视频流压缩编码数据。封装格式种类很多，例如MP4，MKV，RMVB，TS，FLV，AVI等等，它的作用就是将已经压缩编码的视频数据和音频数据按照一定的格式放到一起。例如，FLV格式的数据，经过解封装操作后，输出H.264编码的视频码流和AAC编码的音频码流。</p>
-<p>  <strong>解码</strong>的作用，就是将视频/音频压缩编码数据，解码成为非压缩的视频/音频原始数据。音频的压缩编码标准包含AAC，MP3，AC-3等等，视频的压缩编码标准则包含H.264，MPEG2，VC-1等等。解码是整个系统中最重要也是最复杂的一个环节。通过解码，压缩编码的视频数据输出成为非压缩的颜色数据，例如YUV420P，RGB等等；压缩编码的音频数据输出成为非压缩的音频抽样数据，例如PCM数据。</p>
-<p>  <strong>视音频同步</strong>的作用，就是根据解封装模块处理过程中获取到的参数信息，同步解码出来的视频和音频数据，并将视频音频数据送至系统的显卡和声卡播放出来。</p>
-</li>
-<li><p><strong>目前主流的视频编码标准有什么呢？</strong></p>
-<p>  <img src="https://i.loli.net/2019/01/27/5c4dd01441be8.png" alt="TIM截图20190127233628.png"></p>
-<p>  图中H.264等仅仅是编码标准，而不是一个具体的编码器，H.264只是给编码器的实现提供参照用的。类似于C\C++和GCC的关系。</p>
-</li>
-</ul>
+<p>数字视频信号的压缩正是基于上述两种条件，使得视频数据量得以极大的压缩，有利于传输和存储。一般的数字视频压缩编码方法都是<strong>混合编码</strong>，即将<strong>变换编码(Transform Coding)</strong>，<strong>运动估计(Motion Estimation)</strong>和<strong>运动补偿(Motion Compensation)</strong>，以及<strong>熵编码</strong>三种方式相结合来进行压缩编码。</p>
+<p>通常使用变换编码来消去除图像的帧内冗余，用运动估计和运动补偿来去除图像的帧间冗余，用熵编码来进一步提高压缩的效率。</p>
 <p><strong>整理自 雷霄骅 的Blog <a href="https://blog.csdn.net/leixiaohua1020" target="_blank" rel="noopener">https://blog.csdn.net/leixiaohua1020</a></strong></p>
 
       
@@ -599,8 +528,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/27/视频编解码学习二：视频表示基础/" rel="next" title="视频编解码学习二：视频表示基础">
-                <i class="fa fa-chevron-left"></i> 视频编解码学习二：视频表示基础
+              <a href="/2019/01/28/深度学习：神经网络参数的反向传播算法/" rel="next" title="深度学习：神经网络参数的反向传播算法">
+                <i class="fa fa-chevron-left"></i> 深度学习：神经网络参数的反向传播算法
               </a>
             
           </div>
@@ -608,10 +537,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/28/线性模型：单变量线性回归/" rel="prev" title="机器学习算法：单变量线性回归">
-                机器学习算法：单变量线性回归 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
