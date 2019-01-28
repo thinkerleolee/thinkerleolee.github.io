@@ -104,14 +104,17 @@
 <meta property="og:site_name" content="Thinkerleo">
 <meta property="og:description" content="神经网络模型的代价函数是什么？   假设神经网络的训练样本有$m$个   每个包含一组输入$x$和一组输出信号$y$   $L$表示神经网络层数   $S_I$表示每层的neuron个数($S_l$表示输出层神经元个数)   $S_L$代表最后一层中处理单元的个数。   将神经网络的分类定义为两种情况：二类分类和多类分类，   二类分类：$S_L=0, y=0, or, 1$表示哪一类；   $">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e7148aeaab.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e7148e26b9.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e71496f005.png">
 <meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e714970723.png">
 <meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e71493b34f.png">
 <meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e71493676c.png">
-<meta property="og:updated_time" content="2019-01-28T03:06:43.042Z">
+<meta property="og:updated_time" content="2019-01-28T03:23:41.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习：神经网络参数的反向传播算法">
 <meta name="twitter:description" content="神经网络模型的代价函数是什么？   假设神经网络的训练样本有$m$个   每个包含一组输入$x$和一组输出信号$y$   $L$表示神经网络层数   $S_I$表示每层的neuron个数($S_l$表示输出层神经元个数)   $S_L$代表最后一层中处理单元的个数。   将神经网络的分类定义为两种情况：二类分类和多类分类，   二类分类：$S_L=0, y=0, or, 1$表示哪一类；   $">
-<meta name="twitter:image" content="https://i.loli.net/2019/01/28/5c4e714970723.png">
+<meta name="twitter:image" content="https://i.loli.net/2019/01/28/5c4e7148aeaab.png">
 
 
 
@@ -387,7 +390,7 @@
                 
               
 
-              <time title="Created: 2019-01-28 10:20:07 / Modified: 11:06:43" itemprop="dateCreated datePublished" datetime="2019-01-28T10:20:07+08:00">2019-01-28</time>
+              <time title="Created: 2019-01-28 10:20:07 / Modified: 11:23:41" itemprop="dateCreated datePublished" datetime="2019-01-28T10:20:07+08:00">2019-01-28</time>
             
 
             
@@ -454,24 +457,15 @@
 <p>  将神经网络的分类定义为两种情况：二类分类和多类分类，</p>
 <p>  二类分类：$S_L=0, y=0, or, 1$表示哪一类；</p>
 <p>  $K$类分类：$S_L=k, y_i = 1$表示分到第$i$类；$(k&gt;2)$</p>
+<p>  在逻辑回归中，代价函数为：</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4e7148aeaab.png" alt="逻辑回归-代价函数.png"></p>
+<p>  在逻辑回归中，我们只有一个输出变量，又称为标量，也只有一个因变量$y$。</p>
+<p>  在神经网络中，有多个输出变量，我们的$h_\theta(x)$是一个维度为$K$的向量。训练集中的因变量也是同样维度的一个量，因此代价函数会更为复杂：</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4e7148e26b9.png" alt="神经网络-代价函数.png"></p>
+<p>  对于每一行特征，我们都会给出$K$个预测，我们可以利用循环，对于每一行特征都预测$K$个不同结果，然后利用循环在$K$个预测中选择可能性最高的那个，然后与$y$中的实际数据进行比较。</p>
+<p>  正则化的那一项只是排除了每一层$\theta_0​$后，每一层的$\theta​$ 矩阵的和。最里层的循环$j​$循环所有的行（由$s_l​$ +1 层的激活单元数决定），循环$i​$则循环所有的列，由该层（$s_l​$层）的激活单元数所决定。即：$h_\theta(x)​$与真实值之间的距离为每个样本-每个类输出的加和，对参数进行regularization的bias项处理所有参数的平方和。</p>
+<p>  <img src="https://i.loli.net/2019/01/28/5c4e71496f005.png" alt="神经网络-代价函数推导.png"></p>
 </li>
-</ul>
-<pre><code>在逻辑回归中，代价函数为：
-
-![逻辑回归-代价函数.png](https://i.loli.net/2019/01/28/5c4e7148aeaab.png)
-
-在逻辑回归中，我们只有一个输出变量，又称为标量，也只有一个因变量$y$。
-
-在神经网络中，有多个输出变量，我们的$h_\theta(x)$是一个维度为$K$的向量。训练集中的因变量也是同样维度的一个量，因此代价函数会更为复杂：
-
-![神经网络-代价函数.png](https://i.loli.net/2019/01/28/5c4e7148e26b9.png)
-
-对于每一行特征，我们都会给出$K$个预测，我们可以利用循环，对于每一行特征都预测$K$个不同结果，然后利用循环在$K$个预测中选择可能性最高的那个，然后与$y$中的实际数据进行比较。
-
-正则化的那一项只是排除了每一层$\theta_0​$后，每一层的$\theta​$ 矩阵的和。最里层的循环$j​$循环所有的行（由$s_l​$ +1 层的激活单元数决定），循环$i​$则循环所有的列，由该层（$s_l​$层）的激活单元数所决定。即：$h_\theta(x)​$与真实值之间的距离为每个样本-每个类输出的加和，对参数进行regularization的bias项处理所有参数的平方和。
-
-![神经网络-代价函数推导.png](https://i.loli.net/2019/01/28/5c4e71496f005.png)
-</code></pre><ul>
 <li><p><strong>什么是反向传播算法？</strong></p>
 <p>  反向传播（英语：Backpropagation，缩写为BP）是“误差反向传播”的简称，<strong>是一种与最优化方法（如梯度下降法）结合使用的，用来训练人工神经网络的常见方法</strong>。该方法对网络中所有权重计算损失函数的梯度。这个梯度会反馈给最优化方法，用来更新权值以最小化损失函数。</p>
 <p>  之前我们在计算神经网络预测结果的时候采用了一种正向传播方法：<br>  从第一层开始一层一层计算，直到最后一层$h_\theta(x)$</p>
