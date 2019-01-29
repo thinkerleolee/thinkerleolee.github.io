@@ -105,8 +105,18 @@
 <meta property="og:description" content="JPEG简介JPEG（发音：[ˈdʒeɪpɛg]）是一种针对照片视频而广泛使用的有损压缩标准方法。 这个名称代表Joint Photographic Experts Group（联合图像专家小组）。联合图像专家小组1992年发布了JPEG的标准而在1994年获得了ISO 10918-1的认定。JPEG与视频音频压缩标准的MPEG（Moving Picture Experts Group）很容易混淆">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.loli.net/2019/01/29/5c504733abe62.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/29/5c5058830d150.png">
 <meta property="og:image" content="https://i.loli.net/2019/01/29/5c504bde5913a.png">
-<meta property="og:updated_time" content="2019-01-29T12:53:12.838Z">
+<meta property="og:image" content="https://i.loli.net/2019/01/29/5c505e1535e00.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/29/5c505e159ba10.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/29/5c505e1599aef.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/29/5c505e157d722.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/29/5c50620977226.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/29/5c50620975183.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/29/5c5062872734a.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/29/5c5062ecd0312.png">
+<meta property="og:image" content="https://i.loli.net/2019/01/29/5c5067af2a153.png">
+<meta property="og:updated_time" content="2019-01-29T14:50:17.866Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JPEG编码原理简介">
 <meta name="twitter:description" content="JPEG简介JPEG（发音：[ˈdʒeɪpɛg]）是一种针对照片视频而广泛使用的有损压缩标准方法。 这个名称代表Joint Photographic Experts Group（联合图像专家小组）。联合图像专家小组1992年发布了JPEG的标准而在1994年获得了ISO 10918-1的认定。JPEG与视频音频压缩标准的MPEG（Moving Picture Experts Group）很容易混淆">
@@ -369,7 +379,7 @@
                 
               
 
-              <time title="Created: 2019-01-29 22:30:07 / Modified: 20:53:12" itemprop="dateCreated datePublished" datetime="2019-01-29T22:30:07+08:00">2019-01-29</time>
+              <time title="Created: 2019-01-29 22:30:07 / Modified: 22:50:17" itemprop="dateCreated datePublished" datetime="2019-01-29T22:30:07+08:00">2019-01-29</time>
             
 
             
@@ -437,12 +447,40 @@
 <li>Y成分表示一个像素的亮度</li>
 <li>U和V成分一起表示色调与饱和度。（色度）</li>
 </ul>
+<p>下图为分解开的Y、U、V：</p>
+<p><img src="https://i.loli.net/2019/01/29/5c5058830d150.png" alt="TIM截图20190129213824.png"></p>
 <h3 id="2、下采样（Downsampling）"><a href="#2、下采样（Downsampling）" class="headerlink" title="2、下采样（Downsampling）"></a>2、下采样（Downsampling）</h3><p>下采样、也就是减少人类视觉系统不敏感的色度（U和V的成分）。虽然减少了颜色数量，但是人眼并不会察觉到图像质量有任何的差异。</p>
 <p>JPEG上这种缩减取样的比例可以是4:4:4（无缩减取样），4:2:2（在水平方向2的倍数中取一个，颜色为之前的1/2），以及最普遍的4:2:0（在水平和垂直方向2的倍数中取一个，颜色为之前的1/4）。</p>
 <p>如图：</p>
 <p><img src="https://i.loli.net/2019/01/29/5c504bde5913a.png" alt="TIM截图20190129204920.png"></p>
-<h3 id="3、离散余弦变换（Discrete-cosine-transform）"><a href="#3、离散余弦变换（Discrete-cosine-transform）" class="headerlink" title="3、离散余弦变换（Discrete cosine transform）"></a>3、离散余弦变换（Discrete cosine transform）</h3><p>离散余弦变换是一种类似于傅里叶变换的数学工具（不清楚傅里叶变换的同学可以移步：<a href="https://www.bilibili.com/video/av19141078" target="_blank" rel="noopener">https://www.bilibili.com/video/av19141078</a>来简单了解傅里叶变换）</p>
-<h3 id="4、量化（Quantization）"><a href="#4、量化（Quantization）" class="headerlink" title="4、量化（Quantization）"></a>4、量化（Quantization）</h3><h3 id="5、熵编码技术（entropy-coding）"><a href="#5、熵编码技术（entropy-coding）" class="headerlink" title="5、熵编码技术（entropy coding）"></a>5、熵编码技术（entropy coding）</h3>
+<h3 id="3、离散余弦变换（Discrete-cosine-transform）"><a href="#3、离散余弦变换（Discrete-cosine-transform）" class="headerlink" title="3、离散余弦变换（Discrete cosine transform）"></a>3、离散余弦变换（Discrete cosine transform）</h3><p>离散余弦变换是一种类似于傅里叶变换的数学工具（不清楚傅里叶变换的同学可以移步：<a href="https://www.bilibili.com/video/av19141078" target="_blank" rel="noopener">https://www.bilibili.com/video/av19141078</a>来简单了解傅里叶变换）.它将信号从<strong>时间域</strong>转换到<strong>频率域</strong>。</p>
+<p>这一步，将视频中的每个成分（Y, U, V）生成三个区域，每一个区域再划分成如瓷砖般排列的一个个的8×8子区域，每一子区域使用二维的离散余弦变换（DCT）转换到频率空间。</p>
+<p>如果有一个如这样的的8×8的8-比特（0~255）子区域：</p>
+<p>如图：</p>
+<p><img src="https://i.loli.net/2019/01/29/5c505e1535e00.png" alt="TIM截图20190129220534.png"></p>
+<p>用矩阵表示为：</p>
+<p><img src="https://i.loli.net/2019/01/29/5c505e159ba10.png" alt="TIM截图20190129220547.png"></p>
+<p>原始数据每个值的范围是【0-255】，使每个数字减去128，标准化。</p>
+<p><img src="https://i.loli.net/2019/01/29/5c505e1599aef.png" alt="TIM截图20190129220556.png"></p>
+<p>且接着使用离散余弦变换，和舍位取最接近的整数，得到结果为</p>
+<p><img src="https://i.loli.net/2019/01/29/5c505e157d722.png" alt="TIM截图20190129220603.png"></p>
+<p>左上角之相当大的数值称为DC系数（直流系数）；其他63个值称为AC系数（交流系数）。</p>
+<h3 id="4、量化（Quantization）"><a href="#4、量化（Quantization）" class="headerlink" title="4、量化（Quantization）"></a>4、量化（Quantization）</h3><p>利用人眼对低频数据敏感对高频数据不敏感的特性，我们可以将离散余弦变换后的很多更高频率的成分舍位成为接近0，且剩下很多会变成小的正或负数。</p>
+<p>JPEG标准中定义了量化表。</p>
+<p><img src="https://i.loli.net/2019/01/29/5c50620977226.png" alt="TIM截图20190129222332.png"></p>
+<p><img src="https://i.loli.net/2019/01/29/5c50620975183.png" alt="TIM截图20190129222338.png"></p>
+<p>使用$Q_Y$量化矩阵与前面所得到的DCT系数矩阵逐项相除，得到结果为：</p>
+<p><img src="https://i.loli.net/2019/01/29/5c5062872734a.png" alt="TIM截图20190129222526.png"></p>
+<h3 id="5、熵编码技术（entropy-coding）"><a href="#5、熵编码技术（entropy-coding）" class="headerlink" title="5、熵编码技术（entropy coding）"></a>5、熵编码技术（entropy coding）</h3><p>熵编码是一种无损压缩的技术,它使用Z字形（zigzag）将矩阵数据排列。然后将排列后的数据使用哈夫曼编码。</p>
+<p><img src="https://i.loli.net/2019/01/29/5c5062ecd0312.png" alt="TIM截图20190129222741.png"></p>
+<p>对于前者量化的系数所作的Z字体序列会是：</p>
+<p>−26,<br>−3, 0,<br>−3, −2, −6,<br>2, −4, 1, −3,<br>1, 1, 5, 1, 2,<br>−1, 1, −1, 2, 0, 0,<br>0, 0, 0, −1, −1, 0, 0,<br>0, 0, 0, 0, 0, 0, 0, 0,<br>0, 0, 0, 0, 0, 0, 0,<br>0, 0, 0, 0, 0, 0,<br>0, 0, 0, 0, 0,<br>0, 0, 0, 0,<br>0, 0, 0,<br>0, 0,<br>0</p>
+<p>当剩下的所有系数都是零，对于过早结束的序列，JPEG有一个特别的霍夫曼编码用词。使用这个特殊的编码用词，EOB，该序列变为</p>
+<p>−26,<br>−3, 0,<br>−3, −2, −6,<br>2, −4, 1 −3,<br>1, 1, 5, 1, 2,<br>−1, 1, −1, 2, 0, 0,<br>0, 0, 0, −1, −1, EOB</p>
+<p>在这一步数据量得到了极大的压缩。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>JPEG是一种压缩效率很高的图像压缩算法，主要步骤用图片表示就是：</p>
+<p><img src="https://i.loli.net/2019/01/29/5c5067af2a153.png" alt="TIM截图20190129224710.png"></p>
+
       
     </div>
 
@@ -680,7 +718,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JPEG简介"><span class="nav-number">1.</span> <span class="nav-text">JPEG简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JEPG编码流程"><span class="nav-number">2.</span> <span class="nav-text">JEPG编码流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、色彩空间转换"><span class="nav-number">2.1.</span> <span class="nav-text">1、色彩空间转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、下采样（Downsampling）"><span class="nav-number">2.2.</span> <span class="nav-text">2、下采样（Downsampling）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、离散余弦变换（Discrete-cosine-transform）"><span class="nav-number">2.3.</span> <span class="nav-text">3、离散余弦变换（Discrete cosine transform）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、量化（Quantization）"><span class="nav-number">2.4.</span> <span class="nav-text">4、量化（Quantization）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、熵编码技术（entropy-coding）"><span class="nav-number">2.5.</span> <span class="nav-text">5、熵编码技术（entropy coding）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JPEG简介"><span class="nav-number">1.</span> <span class="nav-text">JPEG简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JEPG编码流程"><span class="nav-number">2.</span> <span class="nav-text">JEPG编码流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、色彩空间转换"><span class="nav-number">2.1.</span> <span class="nav-text">1、色彩空间转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、下采样（Downsampling）"><span class="nav-number">2.2.</span> <span class="nav-text">2、下采样（Downsampling）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、离散余弦变换（Discrete-cosine-transform）"><span class="nav-number">2.3.</span> <span class="nav-text">3、离散余弦变换（Discrete cosine transform）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、量化（Quantization）"><span class="nav-number">2.4.</span> <span class="nav-text">4、量化（Quantization）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、熵编码技术（entropy-coding）"><span class="nav-number">2.5.</span> <span class="nav-text">5、熵编码技术（entropy coding）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
