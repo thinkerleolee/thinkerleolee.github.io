@@ -96,32 +96,29 @@
 
 
 
-  <meta name="description" content="为什么要进行视频压缩？   未经压缩的数字视频（原始数据）的数据量巨大导致的存储困难、传输困难。  为什么能进行视频压缩？   可以去除视频中的冗余信息  空间冗余：图像相邻像素之间有较强的相关性 时间冗余：视频序列的相邻图像之间内容相似 编码冗余：不同像素值出现的概率不同 视觉冗余：人的视觉系统对某些细节不敏感 知识冗余：规律性的结构可由先验知识和背景知识得到   数据压缩分了几类？  无损压">
-<meta name="keywords" content="编解码,音视频">
+  <meta name="description" content="I帧、B帧、P帧简介帧指的是是视频中的单幅画面,多个帧连起来就构成了视频。而在编码视频压缩过程中，为了节省存储空间，并不会将每一帧的信息都会完完全全保留下来，会采用各种方法来减少视频数据大小,其中生成I、B、P帧就是一种编码器常采用的办法。  I frame(Inter frame)：帧内编码帧，I帧是原采样图像经过适度地压缩的产物，可以当成图象，做为随机访问的参考点。I帧可以看成是一个RAW图像">
+<meta name="keywords" content="编解码,视频编解码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="视频编解码学习一：编解码理论基础">
-<meta property="og:url" content="https://thinkerleolee.github.io/2019/01/27/视频编解码学习一：编解码理论基础/index.html">
+<meta property="og:title" content="视频编解码学习四：I帧、B帧和P帧">
+<meta property="og:url" content="https://thinkerleolee.github.io/2019/02/01/视频编解码学习四：I帧、B帧和P帧/index.html">
 <meta property="og:site_name" content="Thinkerleo">
-<meta property="og:description" content="为什么要进行视频压缩？   未经压缩的数字视频（原始数据）的数据量巨大导致的存储困难、传输困难。  为什么能进行视频压缩？   可以去除视频中的冗余信息  空间冗余：图像相邻像素之间有较强的相关性 时间冗余：视频序列的相邻图像之间内容相似 编码冗余：不同像素值出现的概率不同 视觉冗余：人的视觉系统对某些细节不敏感 知识冗余：规律性的结构可由先验知识和背景知识得到   数据压缩分了几类？  无损压">
+<meta property="og:description" content="I帧、B帧、P帧简介帧指的是是视频中的单幅画面,多个帧连起来就构成了视频。而在编码视频压缩过程中，为了节省存储空间，并不会将每一帧的信息都会完完全全保留下来，会采用各种方法来减少视频数据大小,其中生成I、B、P帧就是一种编码器常采用的办法。  I frame(Inter frame)：帧内编码帧，I帧是原采样图像经过适度地压缩的产物，可以当成图象，做为随机访问的参考点。I帧可以看成是一个RAW图像">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce56edafc.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce5717f84.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce56eecc3.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce571e18f.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce56e2eda.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dd01441be8.png">
-<meta property="og:updated_time" content="2019-01-28T03:14:43.777Z">
+<meta property="og:image" content="https://i.loli.net/2019/02/01/5c545e591f1af.png">
+<meta property="og:image" content="https://i.loli.net/2019/02/01/5c545e58f2558.png">
+<meta property="og:image" content="https://i.loli.net/2019/02/01/5c545e591e2d8.png">
+<meta property="og:updated_time" content="2019-02-01T16:02:01.736Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="视频编解码学习一：编解码理论基础">
-<meta name="twitter:description" content="为什么要进行视频压缩？   未经压缩的数字视频（原始数据）的数据量巨大导致的存储困难、传输困难。  为什么能进行视频压缩？   可以去除视频中的冗余信息  空间冗余：图像相邻像素之间有较强的相关性 时间冗余：视频序列的相邻图像之间内容相似 编码冗余：不同像素值出现的概率不同 视觉冗余：人的视觉系统对某些细节不敏感 知识冗余：规律性的结构可由先验知识和背景知识得到   数据压缩分了几类？  无损压">
-<meta name="twitter:image" content="https://i.loli.net/2019/01/27/5c4dce56edafc.png">
+<meta name="twitter:title" content="视频编解码学习四：I帧、B帧和P帧">
+<meta name="twitter:description" content="I帧、B帧、P帧简介帧指的是是视频中的单幅画面,多个帧连起来就构成了视频。而在编码视频压缩过程中，为了节省存储空间，并不会将每一帧的信息都会完完全全保留下来，会采用各种方法来减少视频数据大小,其中生成I、B、P帧就是一种编码器常采用的办法。  I frame(Inter frame)：帧内编码帧，I帧是原采样图像经过适度地压缩的产物，可以当成图象，做为随机访问的参考点。I帧可以看成是一个RAW图像">
+<meta name="twitter:image" content="https://i.loli.net/2019/02/01/5c545e591f1af.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://thinkerleolee.github.io/2019/01/27/视频编解码学习一：编解码理论基础/">
+  <link rel="canonical" href="https://thinkerleolee.github.io/2019/02/01/视频编解码学习四：I帧、B帧和P帧/">
 
 
 
@@ -131,7 +128,7 @@
   };
 </script>
 
-  <title>视频编解码学习一：编解码理论基础 | Thinkerleo</title>
+  <title>视频编解码学习四：I帧、B帧和P帧 | Thinkerleo</title>
   
 
 
@@ -347,7 +344,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/01/27/视频编解码学习一：编解码理论基础/">
+    <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/02/01/视频编解码学习四：I帧、B帧和P帧/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Thinkerleo">
@@ -364,7 +361,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">视频编解码学习一：编解码理论基础
+          <h1 class="post-title" itemprop="name headline">视频编解码学习四：I帧、B帧和P帧
 
               
             
@@ -390,7 +387,7 @@
                 
               
 
-              <time title="Created: 2019-01-27 23:40:07" itemprop="dateCreated datePublished" datetime="2019-01-27T23:40:07+08:00">2019-01-27</time>
+              <time title="Created: 2019-02-01 23:30:07" itemprop="dateCreated datePublished" datetime="2019-02-01T23:30:07+08:00">2019-02-01</time>
             
 
             
@@ -407,7 +404,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-28 11:14:43" itemprop="dateModified" datetime="2019-01-28T11:14:43+08:00">2019-01-28</time>
+                <time title="Modified: 2019-02-02 00:02:01" itemprop="dateModified" datetime="2019-02-02T00:02:01+08:00">2019-02-02</time>
               
             
           </span>
@@ -459,108 +456,69 @@
       
 
       
-        <ul>
-<li><p><strong>为什么要进行视频压缩？</strong></p>
-<p>  未经压缩的数字视频（原始数据）的数据量巨大导致的存储困难、传输困难。</p>
-</li>
-<li><p><strong>为什么能进行视频压缩？</strong></p>
-<p>  可以去除视频中的冗余信息</p>
+        <h2 id="I帧、B帧、P帧简介"><a href="#I帧、B帧、P帧简介" class="headerlink" title="I帧、B帧、P帧简介"></a>I帧、B帧、P帧简介</h2><p>帧指的是是视频中的单幅画面,多个帧连起来就构成了视频。而在编码视频压缩过程中，为了节省存储空间，并不会将每一帧的信息都会完完全全保留下来，会采用各种方法来减少视频数据大小,其中生成I、B、P帧就是一种编码器常采用的办法。</p>
 <ul>
-<li>空间冗余：图像相邻像素之间有较强的相关性</li>
-<li>时间冗余：视频序列的相邻图像之间内容相似</li>
-<li>编码冗余：不同像素值出现的概率不同</li>
-<li>视觉冗余：人的视觉系统对某些细节不敏感</li>
-<li>知识冗余：规律性的结构可由先验知识和背景知识得到</li>
-</ul>
+<li><p>I frame(Inter frame)：<strong>帧内编码帧</strong>，I帧是原采样图像经过适度地压缩的产物，可以当成图象，做为随机访问的参考点。I帧可以看成是一个RAW图像经过压缩后的图像，一般帧的压缩率是7（跟JPEG差不多）。</p>
 </li>
-<li><p><strong>数据压缩分了几类？</strong></p>
-<ul>
-<li><p>无损压缩（Lossless）</p>
-<ul>
-<li><p>压缩前和解压缩后数据完全一致</p>
+<li><p>P frame(Forward Predicted pictures): <strong>前向预测编码帧</strong>，通过充分将低于图像序列中前面已编码帧的时间冗余信息来压缩传输数据量的编码图像，也叫预测帧；</p>
 </li>
-<li><p>压缩比比较低(2:1~3:1)</p>
-<p>无损压缩算法的代表为:gzip(数据)、APE(音频)、JPEG-LS（视频）</p>
+<li><p>B frame(Bidirectionally predicted pictures): <strong>双向预测内插编码帧</strong>，既考虑与源图像序列前面已编码帧，也顾及源图像序列后面已编码帧之间的时间冗余信息来压缩传输数据量的编码图像，也叫双向预测帧；</p>
+</li>
+<li><p>PTS：Presentation Time Stamp。PTS主要用于度量解码后的视频帧什么时候被显示出来</p>
+</li>
+<li><p>DTS：Decode Time Stamp。DTS主要是标识读入内存中的bit流在什么时候开始送入解码器中进行解码。</p>
 </li>
 </ul>
-</li>
-<li><p>有损压缩（Lossy）</p>
-<ul>
-<li><p>压缩前后数据不一致$X \neq X’$</p>
-</li>
-<li><p>压缩比高(10:1~20:1)</p>
-</li>
-<li><p>例如：MPEG-2，H.264/AVC，AVS</p>
-</li>
-</ul>
-<p><a href="https://i.loli.net/2019/01/27/5c4dce56edafc.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56edafc.png" alt="201207290832356582.png"></a></p>
-</li>
-<li><p><strong>那什么是编解码器呢？</strong></p>
-<ul>
-<li><p>编码器（Encoder）</p>
-<ul>
-<li>压缩信号的设备或程序</li>
-</ul>
-</li>
-<li><p>解码器（Decoder）</p>
-<ul>
-<li>解压缩信号的设备或程序</li>
-</ul>
-</li>
-<li><p>编解码器（Codec）</p>
-<ul>
-<li>编解码器对</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>编码器和解码器的一般工作过程是什么？</p>
-<ul>
-<li><p>编码器</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce5717f84.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce5717f84.png" alt="201207290832366059.png"></a></p>
-</li>
-<li><p>解码器</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce56eecc3.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56eecc3.png" alt="201207290832364663.png"></a></p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p><strong>视频传输的QoS参数是什么</strong>？</p>
-<ul>
-<li><p>数据包的端到端的延迟</p>
-</li>
-<li><p>带宽：比特/秒   </p>
-</li>
-<li><p>数据包的流失率（丢包率）</p>
-</li>
-<li><p>数据包的延迟时间的波动</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>我们经常见到的.mov\.mp4\.rmvb这是指的是编码标准吗？</strong></p>
-<p>  不是，.mov等只是封装格式，封装了视频编码协议、音频编码协议等信息。</p>
-<p>  如下图所示：“变形金刚预告片_h1080p.mov”采用MPEG4的QuickTime封装格式（MOV），采用了H.264（AVC）的压缩编码标准。</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce571e18f.jpg" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce571e18f.jpg" alt="20140201115933359.jpg"></a></p>
-</li>
-</ul>
-<ul>
-<li><p><strong>那网上下载下来的视频播放流程是什么呢？</strong></p>
-<p>  视频播放器播放一个互联网上的视频文件，需要经过以下几个步骤：解协议，解封装，解码视音频，视音频同步。如果播放本地文件则不需要解协议，为以下几个步骤：解封装，解码视音频，视音频同步。他们的过程如图所示。</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce56e2eda.jpg" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56e2eda.jpg" alt="20140201120523046.jpg"></a></p>
-<p>  <strong>解协议</strong>的作用，就是将流媒体协议的数据，解析为标准的相应的封装格式数据。视音频在网络上传播的时候，常常采用各种流媒体协议，例如HTTP，RTMP，或是MMS等等。这些协议在传输视音频数据的同时，也会传输一些信令数据。这些信令数据包括对播放的控制（播放，暂停，停止），或者对网络状态的描述等。解协议的过程中会去除掉信令数据而只保留视音频数据。例如，采用RTMP协议传输的数据，经过解协议操作后，输出FLV格式的数据。</p>
-<p>  <strong>解封装</strong>的作用，就是将输入的封装格式的数据，分离成为音频流压缩编码数据和视频流压缩编码数据。封装格式种类很多，例如MP4，MKV，RMVB，TS，FLV，AVI等等，它的作用就是将已经压缩编码的视频数据和音频数据按照一定的格式放到一起。例如，FLV格式的数据，经过解封装操作后，输出H.264编码的视频码流和AAC编码的音频码流。</p>
-<p>  <strong>解码</strong>的作用，就是将视频/音频压缩编码数据，解码成为非压缩的视频/音频原始数据。音频的压缩编码标准包含AAC，MP3，AC-3等等，视频的压缩编码标准则包含H.264，MPEG2，VC-1等等。解码是整个系统中最重要也是最复杂的一个环节。通过解码，压缩编码的视频数据输出成为非压缩的颜色数据，例如YUV420P，RGB等等；压缩编码的音频数据输出成为非压缩的音频抽样数据，例如PCM数据。</p>
-<p>  <strong>视音频同步</strong>的作用，就是根据解封装模块处理过程中获取到的参数信息，同步解码出来的视频和音频数据，并将视频音频数据送至系统的显卡和声卡播放出来。</p>
-</li>
-<li><p><strong>目前主流的视频编码标准有什么呢？</strong></p>
-<p>  <img src="https://i.loli.net/2019/01/27/5c4dd01441be8.png" alt="TIM截图20190127233628.png"></p>
-<p>  图中H.264等仅仅是编码标准，而不是一个具体的编码器，H.264只是给编码器的实现提供参照用的。类似于C\C++和GCC的关系。</p>
-</li>
-</ul>
-<p><strong>整理自 雷霄骅 的Blog <a href="https://blog.csdn.net/leixiaohua1020" target="_blank" rel="noopener">https://blog.csdn.net/leixiaohua1020</a></strong></p>
+<p>ps:在没有B帧存在的情况下DTS的顺序和PTS的顺序应该是一样的。</p>
+<h2 id="IBP帧编码解码过程"><a href="#IBP帧编码解码过程" class="headerlink" title="IBP帧编码解码过程"></a>IBP帧编码解码过程</h2><p>以著名的《旺角卡门》名场面为例：</p>
+<h3 id="视频的原始采样"><a href="#视频的原始采样" class="headerlink" title="视频的原始采样"></a>视频的原始采样</h3><p><img src="https://i.loli.net/2019/02/01/5c545e591f1af.png" alt="TIM截图20190201212730.png"></p>
+<h3 id="编码生成I、B、P帧"><a href="#编码生成I、B、P帧" class="headerlink" title="编码生成I、B、P帧"></a>编码生成I、B、P帧</h3><p>I帧只使用本帧内的数据进行编码，在编码过程中它不需要进行运动估计和运动补偿。</p>
+<p>P帧在编码过程中使用一个前面的I帧或P帧作为参考图像进行<strong>运动补偿</strong>，实际上是对当前图像与参考图像的差值进行编码。B帧的编码方式与P帧相似，惟一不同的地方是在编码过程中它要<strong>使用一个前面的I帧或P帧和一个后面的I帧或P帧进行预测</strong>。</p>
+<p>使用P图像可以保持高压缩比。但是，如果与前一帧有太多场景变化，使用P帧可能会降低图像质量。如果检测到两帧之间发生较大变化，则编码器自动插入I帧。</p>
+<p>由此可见，每一个P帧的编码需要利用一帧图像作为参考图像，而B帧则需要两帧图像作为参考。相比之下，B帧比P帧拥有更高的压缩比。</p>
+<p><img src="https://i.loli.net/2019/02/01/5c545e58f2558.png" alt="TIM截图20190201214903.png"></p>
+<h3 id="解码时还原帧"><a href="#解码时还原帧" class="headerlink" title="解码时还原帧"></a>解码时还原帧</h3><p><img src="https://i.loli.net/2019/02/01/5c545e591e2d8.png" alt="TIM截图20190201215307.png"></p>
+<h2 id="I帧、B帧、P帧的特点"><a href="#I帧、B帧、P帧的特点" class="headerlink" title="I帧、B帧、P帧的特点"></a>I帧、B帧、P帧的特点</h2><h3 id="I-帧特点"><a href="#I-帧特点" class="headerlink" title="I 帧特点:"></a>I 帧特点:</h3><pre><code>1）它是一个全帧压缩编码帧。它将全帧图像信息进行 JPEG 压缩编码及传输;
+
+2）解码时仅用 I 帧的数据就可重构完整图像;
+
+3）I 帧描述了图像背景和运动主体的详情;
+
+4）I 帧不需要参考其他画面而生成;
+
+5）I 帧是 P 帧和 B 帧的参考帧(其质量直接影响到同组中以后各帧的质量);
+
+6）I 帧是帧组 GOP 的基础帧(第一帧),在一组中只有一个 I 帧;
+
+7）I 帧不需要考虑运动矢量;
+
+8）I 帧所占数据的信息量比较大。
+</code></pre><h3 id="B-帧特点"><a href="#B-帧特点" class="headerlink" title="B 帧特点"></a>B 帧特点</h3><pre><code>1）B 帧是由前面的 I 或 P 帧和后面的 P 帧来进行预测的;
+
+2）B 帧传送的是它与前面的 I 或 P 帧和后面的 P 帧之间的预测误差及运动矢量;
+
+3）B 帧是双向预测编码帧;
+
+4）B 帧压缩比最高，因为它只反映丙参考帧间运动主体的变化情况,预测比较准确;
+
+5）B 帧不是参考帧,不会造成解码错误的扩散。
+</code></pre><h3 id="P-帧特点"><a href="#P-帧特点" class="headerlink" title="P 帧特点:"></a>P 帧特点:</h3><pre><code>1）P 帧是 I 帧后面相隔 1~2 帧的编码帧;
+
+2）P 帧采用运动补偿的方法传送它与前面的 I 或 P 帧的差值及运动矢量(预测误差);
+
+3）解码时必须将 I 帧中的预测值与预测误差求和后才能重构完整的 P 帧图像;
+
+4）P 帧属于前向预测的帧间编码。它只参考前面最靠近它的 I 帧或 P 帧;
+
+5）P 帧可以是其后面 P 帧的参考帧,也可以是其前后的 B 帧的参考帧;
+
+6）由于 P 帧是参考帧,它可能造成解码错误的扩散;
+
+7）由于是差值传送，P 帧的压缩比较高。
+</code></pre><p>编码器生成的I帧、B帧、P帧都可以解码为物理帧，使得视频压缩比变高（I帧压缩率7左右、P帧20、B帧可达50），节省了大量的视频存储空间，在相同码率（单位时间传送的数据位数）下，可以提供更好的画质。</p>
+<p>参考：</p>
+<p><a href="https://blog.csdn.net/starzpc/article/details/54668112" target="_blank" rel="noopener">https://blog.csdn.net/starzpc/article/details/54668112</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Inter_frame" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Inter_frame</a></p>
 
       
     </div>
@@ -586,7 +544,7 @@
           
             <a href="/tags/编解码/" rel="tag"># 编解码</a>
           
-            <a href="/tags/音视频/" rel="tag"># 音视频</a>
+            <a href="/tags/视频编解码/" rel="tag"># 视频编解码</a>
           
         </div>
       
@@ -599,8 +557,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/27/视频编解码学习二：视频表示基础/" rel="next" title="视频编解码学习二：视频表示基础">
-                <i class="fa fa-chevron-left"></i> 视频编解码学习二：视频表示基础
+              <a href="/2019/01/29/JPEG编码原理简介/" rel="next" title="JPEG编码原理简介">
+                <i class="fa fa-chevron-left"></i> JPEG编码原理简介
               </a>
             
           </div>
@@ -608,10 +566,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/28/线性模型：单变量线性回归/" rel="prev" title="机器学习算法：单变量线性回归">
-                机器学习算法：单变量线性回归 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -656,8 +610,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -783,6 +746,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#I帧、B帧、P帧简介"><span class="nav-number">1.</span> <span class="nav-text">I帧、B帧、P帧简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IBP帧编码解码过程"><span class="nav-number">2.</span> <span class="nav-text">IBP帧编码解码过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#视频的原始采样"><span class="nav-number">2.1.</span> <span class="nav-text">视频的原始采样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编码生成I、B、P帧"><span class="nav-number">2.2.</span> <span class="nav-text">编码生成I、B、P帧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解码时还原帧"><span class="nav-number">2.3.</span> <span class="nav-text">解码时还原帧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I帧、B帧、P帧的特点"><span class="nav-number">3.</span> <span class="nav-text">I帧、B帧、P帧的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#I-帧特点"><span class="nav-number">3.1.</span> <span class="nav-text">I 帧特点:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-帧特点"><span class="nav-number">3.2.</span> <span class="nav-text">B 帧特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P-帧特点"><span class="nav-number">3.3.</span> <span class="nav-text">P 帧特点:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
