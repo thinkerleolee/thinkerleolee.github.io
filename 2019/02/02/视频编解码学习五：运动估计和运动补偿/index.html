@@ -109,7 +109,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/02/03/5c56c3959b92b.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/03/5c56d5b97dfe3.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/03/5c56c6f30b72a.png">
-<meta property="og:updated_time" content="2019-02-03T11:57:34.770Z">
+<meta property="og:updated_time" content="2019-02-03T12:00:43.514Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="视频编解码学习五：运动估计和运动补偿">
 <meta name="twitter:description" content="运动估计和运动补偿简介在视频序列中，连续的帧间往往有着大量的相同信息，引起帧间误差的主要原因是帧内物体的运动，如图：  图中连续两帧之间（除字幕外），主要区别就是帧内物体（人物）的运动。此时，通过先前已编码帧的图像作为参考帧，对当前帧进行预测的过程称为帧间预测，帧间预测可以节省大量的图像存储空间。 I、B、P帧的帧间预测通常，图像帧是一组一组进行处理的。每组的第一帧(通常是第一帧)在编码的时候不使">
@@ -406,7 +406,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-03 19:57:34" itemprop="dateModified" datetime="2019-02-03T19:57:34+08:00">2019-02-03</time>
+                <time title="Modified: 2019-02-03 20:00:43" itemprop="dateModified" datetime="2019-02-03T20:00:43+08:00">2019-02-03</time>
               
             
           </span>
@@ -481,21 +481,16 @@
 <p>  在基于块的像素匹配中，每一帧都被分解成固定大小的像素块（在MPEG中是16*16）作为匹配单元。</p>
 <p>  如图，在两帧之间同样的16*16像素块有着位置的变化:</p>
 <p>  <img src="https://i.loli.net/2019/02/03/5c56c6f30b72a.png" alt="TIM截图20190203184806.png"></p>
-<p>  在MPEG-4视频编码中，运动估计相当耗时，对编码的实时性影响很大。因此这里特别强调快速算法。运动估计方法主要有像素递归法和块匹配法两大类，前者复杂度很高，实际中应用较少，后者则在H.263和MPEG中广泛采用。在块匹配法中，重点研究块匹配准则及搜索方法。目前有三种常用的匹配准则：
-  　　</p>
+<p>  在MPEG-4视频编码中，运动估计相当耗时，对编码的实时性影响很大。因此这里特别强调快速算法。运动估计方法主要有像素递归法和块匹配法两大类，前者复杂度很高，实际中应用较少，后者则在H.263和MPEG中广泛采用。在块匹配法中，重点研究块匹配准则及搜索方法。目前有三种常用的匹配准则：</p>
 <p>  （1）绝对误差和（SAD, Sum of Absolute Difference）准则；</p>
+<p>  （2）均方误差（MSE, Mean Square Error）准则；</p>
+<p>  （3）归一化互相关函数（NCCF, Normalized Cross Correlation Function）准则。</p>
+<p>  在上述三种准则中，SAD准则具有不需乘法运算、实现简单方便的优点而使用最多，但应清楚匹配准则的选用对匹配结果影响不大。</p>
 </li>
 </ul>
 </li>
 </ul>
-<pre><code>    （2）均方误差（MSE, Mean Square Error）准则；
-
-
-    （3）归一化互相关函数（NCCF, Normalized Cross Correlation Function）准则。
-
-
-    在上述三种准则中，SAD准则具有不需乘法运算、实现简单方便的优点而使用最多，但应清楚匹配准则的选用对匹配结果影响不大。
-</code></pre><p>运动补偿通过<strong>当前帧</strong>和<strong>参考帧</strong>进行做差来形成一个<strong>残差</strong>,这个残差经过编码和变换，携带一些解码器所需要得信息输出到解码器。运动补偿在给定前一帧或未来帧的情况下预测当前帧。</p>
+<p>运动补偿通过<strong>当前帧</strong>和<strong>参考帧</strong>进行做差来形成一个<strong>残差</strong>,这个残差经过编码和变换，携带一些解码器所需要得信息输出到解码器。运动补偿在给定前一帧或未来帧的情况下预测当前帧。</p>
 <p>一个稍微复杂一点的设计是估计一下整帧场景的移动和场景中物体的移动，并将这些运动通过一定的参数编码到码流中去。这样预测帧上的像素值就是由参考帧上具有一定位移的相应像素值而生成的。这样的方法比简单的相减可以获得能量更小的残差，从而获得更好的压缩比—当然，用来描述运动的参数不能在码流中占据太大的部分，否则就会抵消复杂的运动估计带来的好处。</p>
 <p>视频解压缩的时候，只需保存运动矢量和残差数据就可以完全恢复出当前块。</p>
 <p>参考：</p>
