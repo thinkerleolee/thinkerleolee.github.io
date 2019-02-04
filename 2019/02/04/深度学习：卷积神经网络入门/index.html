@@ -96,32 +96,35 @@
 
 
 
-  <meta name="description" content="为什么要进行视频压缩？   未经压缩的数字视频（原始数据）的数据量巨大导致的存储困难、传输困难。  为什么能进行视频压缩？   可以去除视频中的冗余信息  空间冗余：图像相邻像素之间有较强的相关性 时间冗余：视频序列的相邻图像之间内容相似 编码冗余：不同像素值出现的概率不同 视觉冗余：人的视觉系统对某些细节不敏感 知识冗余：规律性的结构可由先验知识和背景知识得到   数据压缩分了几类？  无损压">
-<meta name="keywords" content="编解码,音视频">
+  <meta name="description" content="CNN是什么东西？   CNN是美国有线电视新闻网。。。不好意思走错片场了。   卷积神经网络（Convolutional Neural Networks, CNN）是一种一类包含卷积计算且具有深度结构的前馈神经网络。可以看成是我们之前学习的DNN（或者叫MLP）的加强版神经网络。    我们为什么要使用CNN，相较于MLP，CNN有什么好处？   在样本数量很大的情况下，例如在计算机视觉的研究">
+<meta name="keywords" content="机器学习,算法,深度学习,卷积神经网络">
 <meta property="og:type" content="article">
-<meta property="og:title" content="视频编解码学习一：编解码理论基础">
-<meta property="og:url" content="https://thinkerleolee.github.io/2019/01/27/视频编解码学习一：编解码理论基础/index.html">
+<meta property="og:title" content="深度学习：卷积神经网络入门">
+<meta property="og:url" content="https://thinkerleolee.github.io/2019/02/04/深度学习：卷积神经网络入门/index.html">
 <meta property="og:site_name" content="Thinkerleo">
-<meta property="og:description" content="为什么要进行视频压缩？   未经压缩的数字视频（原始数据）的数据量巨大导致的存储困难、传输困难。  为什么能进行视频压缩？   可以去除视频中的冗余信息  空间冗余：图像相邻像素之间有较强的相关性 时间冗余：视频序列的相邻图像之间内容相似 编码冗余：不同像素值出现的概率不同 视觉冗余：人的视觉系统对某些细节不敏感 知识冗余：规律性的结构可由先验知识和背景知识得到   数据压缩分了几类？  无损压">
+<meta property="og:description" content="CNN是什么东西？   CNN是美国有线电视新闻网。。。不好意思走错片场了。   卷积神经网络（Convolutional Neural Networks, CNN）是一种一类包含卷积计算且具有深度结构的前馈神经网络。可以看成是我们之前学习的DNN（或者叫MLP）的加强版神经网络。    我们为什么要使用CNN，相较于MLP，CNN有什么好处？   在样本数量很大的情况下，例如在计算机视觉的研究">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce56edafc.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce5717f84.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce56eecc3.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce571e18f.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dce56e2eda.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/01/27/5c4dd01441be8.png">
-<meta property="og:updated_time" content="2019-01-28T03:14:43.777Z">
+<meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce97b4773.png">
+<meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce9793ec7.png">
+<meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce978c3f1.png">
+<meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce97690aa.png">
+<meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce97ac714.png">
+<meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce9783f36.png">
+<meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce971994f.png">
+<meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce970aab0.png">
+<meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce9765428.png">
+<meta property="og:updated_time" content="2019-02-04T05:42:42.623Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="视频编解码学习一：编解码理论基础">
-<meta name="twitter:description" content="为什么要进行视频压缩？   未经压缩的数字视频（原始数据）的数据量巨大导致的存储困难、传输困难。  为什么能进行视频压缩？   可以去除视频中的冗余信息  空间冗余：图像相邻像素之间有较强的相关性 时间冗余：视频序列的相邻图像之间内容相似 编码冗余：不同像素值出现的概率不同 视觉冗余：人的视觉系统对某些细节不敏感 知识冗余：规律性的结构可由先验知识和背景知识得到   数据压缩分了几类？  无损压">
-<meta name="twitter:image" content="https://i.loli.net/2019/01/27/5c4dce56edafc.png">
+<meta name="twitter:title" content="深度学习：卷积神经网络入门">
+<meta name="twitter:description" content="CNN是什么东西？   CNN是美国有线电视新闻网。。。不好意思走错片场了。   卷积神经网络（Convolutional Neural Networks, CNN）是一种一类包含卷积计算且具有深度结构的前馈神经网络。可以看成是我们之前学习的DNN（或者叫MLP）的加强版神经网络。    我们为什么要使用CNN，相较于MLP，CNN有什么好处？   在样本数量很大的情况下，例如在计算机视觉的研究">
+<meta name="twitter:image" content="https://i.loli.net/2019/02/04/5c57ce97b4773.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://thinkerleolee.github.io/2019/01/27/视频编解码学习一：编解码理论基础/">
+  <link rel="canonical" href="https://thinkerleolee.github.io/2019/02/04/深度学习：卷积神经网络入门/">
 
 
 
@@ -131,7 +134,7 @@
   };
 </script>
 
-  <title>视频编解码学习一：编解码理论基础 | Thinkerleo</title>
+  <title>深度学习：卷积神经网络入门 | Thinkerleo</title>
   
 
 
@@ -347,7 +350,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/01/27/视频编解码学习一：编解码理论基础/">
+    <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/02/04/深度学习：卷积神经网络入门/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Thinkerleo">
@@ -364,7 +367,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">视频编解码学习一：编解码理论基础
+          <h1 class="post-title" itemprop="name headline">深度学习：卷积神经网络入门
 
               
             
@@ -390,24 +393,12 @@
                 
               
 
-              <time title="Created: 2019-01-27 23:40:07" itemprop="dateCreated datePublished" datetime="2019-01-27T23:40:07+08:00">2019-01-27</time>
+              <time title="Created: 2019-02-04 10:20:07 / Modified: 13:42:42" itemprop="dateCreated datePublished" datetime="2019-02-04T10:20:07+08:00">2019-02-04</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-01-28 11:14:43" itemprop="dateModified" datetime="2019-01-28T11:14:43+08:00">2019-01-28</time>
               
             
           </span>
@@ -424,7 +415,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/音视频开发/" itemprop="url" rel="index"><span itemprop="name">音视频开发</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
 
                 
                 
@@ -460,107 +451,164 @@
 
       
         <ul>
-<li><p><strong>为什么要进行视频压缩？</strong></p>
-<p>  未经压缩的数字视频（原始数据）的数据量巨大导致的存储困难、传输困难。</p>
-</li>
-<li><p><strong>为什么能进行视频压缩？</strong></p>
-<p>  可以去除视频中的冗余信息</p>
-<ul>
-<li>空间冗余：图像相邻像素之间有较强的相关性</li>
-<li>时间冗余：视频序列的相邻图像之间内容相似</li>
-<li>编码冗余：不同像素值出现的概率不同</li>
-<li>视觉冗余：人的视觉系统对某些细节不敏感</li>
-<li>知识冗余：规律性的结构可由先验知识和背景知识得到</li>
-</ul>
-</li>
-<li><p><strong>数据压缩分了几类？</strong></p>
-<ul>
-<li><p>无损压缩（Lossless）</p>
-<ul>
-<li><p>压缩前和解压缩后数据完全一致</p>
-</li>
-<li><p>压缩比比较低(2:1~3:1)</p>
-<p>无损压缩算法的代表为:gzip(数据)、APE(音频)、JPEG-LS（视频）</p>
+<li><p><strong>CNN是什么东西？</strong></p>
+<p>  <del>CNN是美国有线电视新闻网。。。不好意思走错片场了。</del></p>
+<p>  <strong>卷积神经网络</strong>（Convolutional Neural Networks, CNN）是一种一类包含卷积计算且具有深度结构的前馈神经网络。可以看成是我们之前学习的DNN（或者叫MLP）的加强版神经网络。</p>
 </li>
 </ul>
-</li>
-<li><p>有损压缩（Lossy）</p>
 <ul>
-<li><p>压缩前后数据不一致$X \neq X’$</p>
+<li><p><strong>我们为什么要使用CNN，相较于MLP，CNN有什么好处？</strong></p>
+<p>  在样本数量很大的情况下，例如在计算机视觉的研究中，输入层往往要输入一张图片。这种很大的输入如果使用MLP来计算，计算量会很大，效率会很低。</p>
+<p>  于是，我们使用CNN（卷积神经网络）来解决这个问题。</p>
 </li>
-<li><p>压缩比高(10:1~20:1)</p>
-</li>
-<li><p>例如：MPEG-2，H.264/AVC，AVS</p>
-</li>
-</ul>
-<p><a href="https://i.loli.net/2019/01/27/5c4dce56edafc.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56edafc.png" alt="201207290832356582.png"></a></p>
-</li>
-<li><p><strong>那什么是编解码器呢？</strong></p>
+<li><p><strong>CNN的神经网络结构是什么？为什么能解决上述DNN难以解决的问题？</strong></p>
+<p>  以一个计算机视觉问题-物体识别为例：</p>
+<p>  <img src="https://i.loli.net/2019/02/04/5c57ce97b4773.png" alt="CNN-交通工具分类.png"></p>
+<p>  CNN主要是由以下层次组成：</p>
 <ul>
-<li><p>编码器（Encoder）</p>
-<ul>
-<li>压缩信号的设备或程序</li>
-</ul>
-</li>
-<li><p>解码器（Decoder）</p>
-<ul>
-<li>解压缩信号的设备或程序</li>
-</ul>
-</li>
-<li><p>编解码器（Codec）</p>
-<ul>
-<li>编解码器对</li>
-</ul>
+<li>数据输入层/Input Layer</li>
+<li>卷积计算层/CONV Later</li>
+<li>激励层（激活层）/Activation Layer</li>
+<li>池化层/Pooling Layer</li>
+<li>全连接层/FC Layer</li>
+<li><p>Batch Normalization层（可能会有）</p>
+<p><strong>不同层次有不同形式（运算）与功能</strong></p>
+<p>CNN使用<strong>卷积</strong>和<strong>池化</strong>的方式简化的网络参数数量和网络结构，是计算机视觉问题更易于解决。</p>
 </li>
 </ul>
 </li>
-<li><p>编码器和解码器的一般工作过程是什么？</p>
+<li><p><strong>CNN的输入层是如何处理输入原始输入的？</strong></p>
+<p>  有常见的三种数据处理方式：</p>
 <ul>
-<li><p>编码器</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce5717f84.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce5717f84.png" alt="201207290832366059.png"></a></p>
+<li><p>去均值</p>
+<ul>
+<li>把输入的数据各个维度都中心化到0</li>
+</ul>
 </li>
-<li><p>解码器</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce56eecc3.png" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56eecc3.png" alt="201207290832364663.png"></a></p>
+<li><p>归一化</p>
+<ul>
+<li>幅度归一化到同样的范围</li>
+</ul>
+</li>
+<li><p>PCA/白化</p>
+<ul>
+<li>用PCA降维</li>
+<li>白化是对数据的每个特征轴上的幅度的归一化</li>
+</ul>
+</li>
+<li><p><strong>去均值与归一化如何进行？</strong></p>
+<p>  <img src="https://i.loli.net/2019/02/04/5c57ce9793ec7.png" alt="CNN-去均值与归一化.png"></p>
+<p>  第二张图就是对第一张图的去均值，目的是把输入数据各个维度都中心化为0，避免数据过多偏差。</p>
+<p>  第三张图片是归一化，目的是将参数的取值限制在某一个范围中，便于计算。</p>
+</li>
+<li><p><strong>去相关和白化如何进行？</strong></p>
+<p>  <img src="https://i.loli.net/2019/02/04/5c57ce978c3f1.png" alt="CNN-去相关和白化.png"></p>
 </li>
 </ul>
 </li>
 </ul>
 <ul>
-<li><p><strong>视频传输的QoS参数是什么</strong>？</p>
+<li><p><strong>CNN的卷积计算层如何进行操作？</strong></p>
+<p>  卷积层表示:</p>
+<p>  <img src="https://i.loli.net/2019/02/04/5c57ce97690aa.png" alt="CNN-卷积计算层表示.png"></p>
+<p>  图中32<em>32</em>3是输入层，蓝色圆圈表示一个个神经元。</p>
+<p>  在DNN中，我们会将每一个输入元素和每一个下一层神经元相连接。</p>
+<p>  但是在CNN中，我们使用一个‘滑窗’的概念，是部分数据和一个神经元连接起来，如图。这样就可以减少很多参数。</p>
+<p>  其中：</p>
+<p>  深度/depth是指这层神经元的个数。</p>
+<p>  步长/stride指的是滑窗每次滑动的距离。</p>
+<p>  填充值/zero-padding指的是当不方便滑动的时候我们会在数据集周边补零方便滑动。<br>  （如下图）</p>
+<p>  <img src="https://i.loli.net/2019/02/04/5c57ce97ac714.png" alt="CNN-卷积计算层表示2.png"></p>
+</li>
+</ul>
+<pre><code>如上图，假设输入的是充填以后为 7*7 的数据的一个窗口，通过一个kernel/filter（神经元）所得到的一个值，为-8。
+
+卷积层的特点：
+
+- **参数共享机制。假设每个神经元连接数据窗的权重是固定的。**
+
+- **固定每个神经元连接权重，可以看做模板。每个神经元只关注一个特征。**
+
+- **需要估算的权重\\参数个数减少：一层1亿=&gt;3.5w**
+
+- **一组固定的权重和不同窗口内数据做内积：卷积。**
+</code></pre><ul>
+<li><p><strong>激励层的作用是什么？</strong></p>
+<p>  作用：<strong>把卷积层输出结果做非线性映射</strong></p>
+<p>  图示：</p>
+<p>  <img src="https://i.loli.net/2019/02/04/5c57ce9783f36.png" alt="CNN-激励函数.png"></p>
+</li>
+</ul>
 <ul>
-<li><p>数据包的端到端的延迟</p>
-</li>
-<li><p>带宽：比特/秒   </p>
-</li>
-<li><p>数据包的流失率（丢包率）</p>
-</li>
-<li><p>数据包的延迟时间的波动</p>
+<li><p><strong>常用的激励\\激活函数是什么?怎样选择激活函数？</strong></p>
+<p>  <img src="https://i.loli.net/2019/02/04/5c57ce971994f.png" alt="CNN-激活函数.png"></p>
 </li>
 </ul>
+<pre><code>注意：
+
+- **CNN中慎用sigmoid函数!!**
+- **CNN中首先试用RELU，因为RELU效率比较高**
+- **如果RELE效果不理想，可以使用Leaky RELU或者Maxout**
+- **某些情况下tanh有不错的效果，但是很少**
+</code></pre><ul>
+<li><p><strong>池化层\\Pooling Layer作用是什么?</strong></p>
+<p>  池化层的作用是<strong>压缩数据与参数的量，减少过拟合。</strong> 类似于图片降分辨率操作。这个操作称为<strong>下采样(downsampling)</strong></p>
+<p>  <img src="https://i.loli.net/2019/02/04/5c57ce970aab0.png" alt="CNN-池化层.png"></p>
 </li>
-</ul>
+<li><p><strong>池化操作主要有哪几种？如何操作？</strong></p>
+<p>  <img src="https://i.loli.net/2019/02/04/5c57ce9765428.png" alt="CNN-池化操作.png"></p>
+<p>  如图，池化操作主要分为平均池化（Average Pooling），最大池化（Max Pooing）两种。</p>
+<p>  平时主要使用的是最大池化，池化后会保留图像最明显的特征。</p>
 </li>
-<li><p><strong>我们经常见到的.mov\.mp4\.rmvb这是指的是编码标准吗？</strong></p>
-<p>  不是，.mov等只是封装格式，封装了视频编码协议、音频编码协议等信息。</p>
-<p>  如下图所示：“变形金刚预告片_h1080p.mov”采用MPEG4的QuickTime封装格式（MOV），采用了H.264（AVC）的压缩编码标准。</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce571e18f.jpg" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce571e18f.jpg" alt="20140201115933359.jpg"></a></p>
+<li><p><strong>什么是全连接层？全连接层的特点是什么？</strong></p>
+<p>  全连接层是通常加在网络尾部的一个处理层。</p>
+<p>  它的特点是两层之间所有神经元都有权重连接。</p>
 </li>
-</ul>
+<li><p><strong>典型的CNN结构是什么？</strong></p>
 <ul>
-<li><p><strong>那网上下载下来的视频播放流程是什么呢？</strong></p>
-<p>  视频播放器播放一个互联网上的视频文件，需要经过以下几个步骤：解协议，解封装，解码视音频，视音频同步。如果播放本地文件则不需要解协议，为以下几个步骤：解封装，解码视音频，视音频同步。他们的过程如图所示。</p>
-<p>  <a href="https://i.loli.net/2019/01/27/5c4dce56e2eda.jpg" target="_blank" rel="noopener"><img src="https://i.loli.net/2019/01/27/5c4dce56e2eda.jpg" alt="20140201120523046.jpg"></a></p>
-<p>  <strong>解协议</strong>的作用，就是将流媒体协议的数据，解析为标准的相应的封装格式数据。视音频在网络上传播的时候，常常采用各种流媒体协议，例如HTTP，RTMP，或是MMS等等。这些协议在传输视音频数据的同时，也会传输一些信令数据。这些信令数据包括对播放的控制（播放，暂停，停止），或者对网络状态的描述等。解协议的过程中会去除掉信令数据而只保留视音频数据。例如，采用RTMP协议传输的数据，经过解协议操作后，输出FLV格式的数据。</p>
-<p>  <strong>解封装</strong>的作用，就是将输入的封装格式的数据，分离成为音频流压缩编码数据和视频流压缩编码数据。封装格式种类很多，例如MP4，MKV，RMVB，TS，FLV，AVI等等，它的作用就是将已经压缩编码的视频数据和音频数据按照一定的格式放到一起。例如，FLV格式的数据，经过解封装操作后，输出H.264编码的视频码流和AAC编码的音频码流。</p>
-<p>  <strong>解码</strong>的作用，就是将视频/音频压缩编码数据，解码成为非压缩的视频/音频原始数据。音频的压缩编码标准包含AAC，MP3，AC-3等等，视频的压缩编码标准则包含H.264，MPEG2，VC-1等等。解码是整个系统中最重要也是最复杂的一个环节。通过解码，压缩编码的视频数据输出成为非压缩的颜色数据，例如YUV420P，RGB等等；压缩编码的音频数据输出成为非压缩的音频抽样数据，例如PCM数据。</p>
-<p>  <strong>视音频同步</strong>的作用，就是根据解封装模块处理过程中获取到的参数信息，同步解码出来的视频和音频数据，并将视频音频数据送至系统的显卡和声卡播放出来。</p>
+<li><p>INPUT(输入层)</p>
 </li>
-<li><p><strong>目前主流的视频编码标准有什么呢？</strong></p>
-<p>  <img src="https://i.loli.net/2019/01/27/5c4dd01441be8.png" alt="TIM截图20190127233628.png"></p>
-<p>  图中H.264等仅仅是编码标准，而不是一个具体的编码器，H.264只是给编码器的实现提供参照用的。类似于C\C++和GCC的关系。</p>
+<li><p>[[CONV-&gt;RELU]<em>N-&gt;POOL?]</em>M (每个卷积层搭配一个激活层，多个卷积层+激活层后<strong>可能</strong>会搭配一个池化层)</p>
+</li>
+<li><p>[FC-&gt;RELU]*K (K个全连接层搭配激活层)</p>
+</li>
+<li><p>FC (尾部接全连接层)</p>
 </li>
 </ul>
-<p><strong>整理自 雷霄骅 的Blog <a href="https://blog.csdn.net/leixiaohua1020" target="_blank" rel="noopener">https://blog.csdn.net/leixiaohua1020</a></strong></p>
+</li>
+<li><p><strong>那么，神经网络的优缺点是什么呢？</strong></p>
+<p>  <strong>优点：</strong></p>
+<ul>
+<li><p>共享卷积核</p>
+</li>
+<li><p>无需手动选取特征，训练好权重，即得特征</p>
+</li>
+<li><p>深层次的网络抽取图像信息丰富，表达效果好</p>
+<p><strong>缺点：</strong></p>
+</li>
+<li><p>需要调参，需要大样本量，GPU等硬件依赖</p>
+</li>
+<li><p>物理含义不明确</p>
+</li>
+</ul>
+</li>
+<li><p><strong>神经网络会出现过拟合吗?如何解决？</strong></p>
+<p>  神经网络学习能力强可能会过拟合。</p>
+<p>  解决方法是：<strong>Dropout(随机失活)正则化</strong>，在向前传导过程中，随机地设置有些神经元为0.</p>
+</li>
+<li><p><strong>Dropout(随机失活)的原理是什么?</strong></p>
+<p>  <strong>dropout的工作原理主要可以分为3步：</strong></p>
+<ul>
+<li><p>1、遍历神经网络的每一层节点，设置节点保留概率keep_prob，假设keep_prob=0.5</p>
+<ul>
+<li>2、删除神经网络的节点，并删除网络与移除节点之间的连接</li>
+</ul>
+</li>
+<li><p>3、输入样本，使用简化后的网络进行训练，每次输入样本的时候都要重复这三步。</p>
+</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -584,9 +632,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/编解码/" rel="tag"># 编解码</a>
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
           
-            <a href="/tags/音视频/" rel="tag"># 音视频</a>
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/卷积神经网络/" rel="tag"># 卷积神经网络</a>
           
         </div>
       
@@ -599,8 +651,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/27/视频编解码学习二：视频表示基础/" rel="next" title="视频编解码学习二：视频表示基础">
-                <i class="fa fa-chevron-left"></i> 视频编解码学习二：视频表示基础
+              <a href="/2019/02/02/视频编解码学习五：运动估计和运动补偿/" rel="next" title="视频编解码学习五：运动估计和运动补偿">
+                <i class="fa fa-chevron-left"></i> 视频编解码学习五：运动估计和运动补偿
               </a>
             
           </div>
@@ -608,10 +660,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/28/线性模型：单变量线性回归/" rel="prev" title="机器学习算法：单变量线性回归">
-                机器学习算法：单变量线性回归 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
