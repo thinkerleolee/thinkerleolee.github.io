@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce971994f.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce970aab0.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce9765428.png">
-<meta property="og:updated_time" content="2019-02-04T05:42:42.623Z">
+<meta property="og:updated_time" content="2019-02-04T05:47:42.912Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习：卷积神经网络入门">
 <meta name="twitter:description" content="CNN是什么东西？   CNN是美国有线电视新闻网。。。不好意思走错片场了。   卷积神经网络（Convolutional Neural Networks, CNN）是一种一类包含卷积计算且具有深度结构的前馈神经网络。可以看成是我们之前学习的DNN（或者叫MLP）的加强版神经网络。    我们为什么要使用CNN，相较于MLP，CNN有什么好处？   在样本数量很大的情况下，例如在计算机视觉的研究">
@@ -393,7 +393,7 @@
                 
               
 
-              <time title="Created: 2019-02-04 10:20:07 / Modified: 13:42:42" itemprop="dateCreated datePublished" datetime="2019-02-04T10:20:07+08:00">2019-02-04</time>
+              <time title="Created: 2019-02-04 10:20:07 / Modified: 13:47:42" itemprop="dateCreated datePublished" datetime="2019-02-04T10:20:07+08:00">2019-02-04</time>
             
 
             
@@ -519,20 +519,19 @@
 <p>  步长/stride指的是滑窗每次滑动的距离。</p>
 <p>  填充值/zero-padding指的是当不方便滑动的时候我们会在数据集周边补零方便滑动。<br>  （如下图）</p>
 <p>  <img src="https://i.loli.net/2019/02/04/5c57ce97ac714.png" alt="CNN-卷积计算层表示2.png"></p>
+<p>  如上图，假设输入的是充填以后为 7*7 的数据的一个窗口，通过一个kernel/filter（神经元）所得到的一个值，为-8。</p>
+<p>  卷积层的特点：</p>
+<ul>
+<li><p><strong>参数共享机制。假设每个神经元连接数据窗的权重是固定的。</strong></p>
+</li>
+<li><p><strong>固定每个神经元连接权重，可以看做模板。每个神经元只关注一个特征。</strong></p>
+</li>
+<li><p><strong>需要估算的权重\\参数个数减少：一层1亿=&gt;3.5w</strong></p>
+</li>
+<li><p><strong>一组固定的权重和不同窗口内数据做内积：卷积。</strong></p>
 </li>
 </ul>
-<pre><code>如上图，假设输入的是充填以后为 7*7 的数据的一个窗口，通过一个kernel/filter（神经元）所得到的一个值，为-8。
-
-卷积层的特点：
-
-- **参数共享机制。假设每个神经元连接数据窗的权重是固定的。**
-
-- **固定每个神经元连接权重，可以看做模板。每个神经元只关注一个特征。**
-
-- **需要估算的权重\\参数个数减少：一层1亿=&gt;3.5w**
-
-- **一组固定的权重和不同窗口内数据做内积：卷积。**
-</code></pre><ul>
+</li>
 <li><p><strong>激励层的作用是什么？</strong></p>
 <p>  作用：<strong>把卷积层输出结果做非线性映射</strong></p>
 <p>  图示：</p>
