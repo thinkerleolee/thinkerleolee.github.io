@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce971994f.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce970aab0.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/04/5c57ce9765428.png">
-<meta property="og:updated_time" content="2019-02-04T05:47:42.912Z">
+<meta property="og:updated_time" content="2019-02-04T05:48:48.703Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习：卷积神经网络入门">
 <meta name="twitter:description" content="CNN是什么东西？   CNN是美国有线电视新闻网。。。不好意思走错片场了。   卷积神经网络（Convolutional Neural Networks, CNN）是一种一类包含卷积计算且具有深度结构的前馈神经网络。可以看成是我们之前学习的DNN（或者叫MLP）的加强版神经网络。    我们为什么要使用CNN，相较于MLP，CNN有什么好处？   在样本数量很大的情况下，例如在计算机视觉的研究">
@@ -393,7 +393,7 @@
                 
               
 
-              <time title="Created: 2019-02-04 10:20:07 / Modified: 13:47:42" itemprop="dateCreated datePublished" datetime="2019-02-04T10:20:07+08:00">2019-02-04</time>
+              <time title="Created: 2019-02-04 10:20:07 / Modified: 13:48:48" itemprop="dateCreated datePublished" datetime="2019-02-04T10:20:07+08:00">2019-02-04</time>
             
 
             
@@ -541,15 +541,14 @@
 <ul>
 <li><p><strong>常用的激励\\激活函数是什么?怎样选择激活函数？</strong></p>
 <p>  <img src="https://i.loli.net/2019/02/04/5c57ce971994f.png" alt="CNN-激活函数.png"></p>
-</li>
+<p>  注意：</p>
+<ul>
+<li><strong>CNN中慎用sigmoid函数!!</strong></li>
+<li><strong>CNN中首先试用RELU，因为RELU效率比较高</strong></li>
+<li><strong>如果RELE效果不理想，可以使用Leaky RELU或者Maxout</strong></li>
+<li><strong>某些情况下tanh有不错的效果，但是很少</strong></li>
 </ul>
-<pre><code>注意：
-
-- **CNN中慎用sigmoid函数!!**
-- **CNN中首先试用RELU，因为RELU效率比较高**
-- **如果RELE效果不理想，可以使用Leaky RELU或者Maxout**
-- **某些情况下tanh有不错的效果，但是很少**
-</code></pre><ul>
+</li>
 <li><p><strong>池化层\\Pooling Layer作用是什么?</strong></p>
 <p>  池化层的作用是<strong>压缩数据与参数的量，减少过拟合。</strong> 类似于图片降分辨率操作。这个操作称为<strong>下采样(downsampling)</strong></p>
 <p>  <img src="https://i.loli.net/2019/02/04/5c57ce970aab0.png" alt="CNN-池化层.png"></p>
