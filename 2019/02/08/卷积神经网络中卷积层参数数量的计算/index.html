@@ -96,28 +96,29 @@
 
 
 
-  <meta name="description" content="视频信号主要是哪两个方面的冗余？  数据冗余  图像的各像素之间存在着很强的相关性。消除这些冗余并不会导致信息损失，属于无损压缩。   冗余的数据主要有：  空间冗余 时间冗余 结构冗余 信息熵冗余 …   视觉冗余   人眼的一些特性比如亮度辨别阈值，视觉阈值，对亮度和色度的敏感度不同，使得在编码的时候引入适量的误差，也不会被察觉出来。可以利用人眼的视觉特性，以一定的客观失真换取数据压缩。这种">
-<meta name="keywords" content="编解码,音视频">
+  <meta name="description" content="如图,某层卷积层输入数据大小为$32\times 32$,通道数为$3$。卷积层有四个kernel,kernel大小为$5\times 5$,$3$个通道,kernel数量是$4$. 假设卷积步长$stride=1$,,$pading=0$,特征图的大小为$28\times 28$(${(32-5)}\div 1 + 1 = 28$),四个卷积核所以有$4$张feature-map。  参数的数量">
+<meta name="keywords" content="机器学习,算法,深度学习,卷积神经网络">
 <meta property="og:type" content="article">
-<meta property="og:title" content="视频编解码学习三：视频信号的冗余信息">
-<meta property="og:url" content="https://thinkerleolee.github.io/2019/01/28/视频编解码学习三：视频信号的冗余信息/index.html">
+<meta property="og:title" content="卷积神经网络中卷积层参数数量的计算">
+<meta property="og:url" content="https://thinkerleolee.github.io/2019/02/08/卷积神经网络中卷积层参数数量的计算/index.html">
 <meta property="og:site_name" content="Thinkerleo">
-<meta property="og:description" content="视频信号主要是哪两个方面的冗余？  数据冗余  图像的各像素之间存在着很强的相关性。消除这些冗余并不会导致信息损失，属于无损压缩。   冗余的数据主要有：  空间冗余 时间冗余 结构冗余 信息熵冗余 …   视觉冗余   人眼的一些特性比如亮度辨别阈值，视觉阈值，对亮度和色度的敏感度不同，使得在编码的时候引入适量的误差，也不会被察觉出来。可以利用人眼的视觉特性，以一定的客观失真换取数据压缩。这种">
+<meta property="og:description" content="如图,某层卷积层输入数据大小为$32\times 32$,通道数为$3$。卷积层有四个kernel,kernel大小为$5\times 5$,$3$个通道,kernel数量是$4$. 假设卷积步长$stride=1$,,$pading=0$,特征图的大小为$28\times 28$(${(32-5)}\div 1 + 1 = 28$),四个卷积核所以有$4$张feature-map。  参数的数量">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e94c5011b1.png">
-<meta property="og:image" content="https://i.loli.net/2019/01/28/5c4e97ed6c038.png">
-<meta property="og:updated_time" content="2019-01-28T06:37:09.194Z">
+<meta property="og:image" content="https://i.loli.net/2019/02/08/5c5d3b27c8dea.bmp">
+<meta property="og:image" content="https://i.loli.net/2019/02/08/5c5d415be0538.bmp">
+<meta property="og:image" content="https://i.loli.net/2019/02/08/5c5d441c481de.bmp">
+<meta property="og:updated_time" content="2019-02-08T09:23:27.882Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="视频编解码学习三：视频信号的冗余信息">
-<meta name="twitter:description" content="视频信号主要是哪两个方面的冗余？  数据冗余  图像的各像素之间存在着很强的相关性。消除这些冗余并不会导致信息损失，属于无损压缩。   冗余的数据主要有：  空间冗余 时间冗余 结构冗余 信息熵冗余 …   视觉冗余   人眼的一些特性比如亮度辨别阈值，视觉阈值，对亮度和色度的敏感度不同，使得在编码的时候引入适量的误差，也不会被察觉出来。可以利用人眼的视觉特性，以一定的客观失真换取数据压缩。这种">
-<meta name="twitter:image" content="https://i.loli.net/2019/01/28/5c4e94c5011b1.png">
+<meta name="twitter:title" content="卷积神经网络中卷积层参数数量的计算">
+<meta name="twitter:description" content="如图,某层卷积层输入数据大小为$32\times 32$,通道数为$3$。卷积层有四个kernel,kernel大小为$5\times 5$,$3$个通道,kernel数量是$4$. 假设卷积步长$stride=1$,,$pading=0$,特征图的大小为$28\times 28$(${(32-5)}\div 1 + 1 = 28$),四个卷积核所以有$4$张feature-map。  参数的数量">
+<meta name="twitter:image" content="https://i.loli.net/2019/02/08/5c5d3b27c8dea.bmp">
 
 
 
 
 
 
-  <link rel="canonical" href="https://thinkerleolee.github.io/2019/01/28/视频编解码学习三：视频信号的冗余信息/">
+  <link rel="canonical" href="https://thinkerleolee.github.io/2019/02/08/卷积神经网络中卷积层参数数量的计算/">
 
 
 
@@ -127,7 +128,7 @@
   };
 </script>
 
-  <title>视频编解码学习三：视频信号的冗余信息 | Thinkerleo</title>
+  <title>卷积神经网络中卷积层参数数量的计算 | Thinkerleo</title>
   
 
 
@@ -343,7 +344,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/01/28/视频编解码学习三：视频信号的冗余信息/">
+    <link itemprop="mainEntityOfPage" href="https://thinkerleolee.github.io/2019/02/08/卷积神经网络中卷积层参数数量的计算/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Thinkerleo">
@@ -360,7 +361,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">视频编解码学习三：视频信号的冗余信息
+          <h1 class="post-title" itemprop="name headline">卷积神经网络中卷积层参数数量的计算
 
               
             
@@ -386,7 +387,7 @@
                 
               
 
-              <time title="Created: 2019-01-28 12:30:07 / Modified: 14:37:09" itemprop="dateCreated datePublished" datetime="2019-01-28T12:30:07+08:00">2019-01-28</time>
+              <time title="Created: 2019-02-08 10:20:07 / Modified: 17:23:27" itemprop="dateCreated datePublished" datetime="2019-02-08T10:20:07+08:00">2019-02-08</time>
             
 
             
@@ -408,7 +409,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/音视频开发/" itemprop="url" rel="index"><span itemprop="name">音视频开发</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
 
                 
                 
@@ -443,54 +444,24 @@
       
 
       
-        <ul>
-<li><p><strong>视频信号主要是哪两个方面的冗余？</strong></p>
-<ul>
-<li><p>数据冗余<br>  图像的各像素之间存在着很强的相关性。消除这些冗余并不会导致信息损失，属于<strong>无损压缩</strong>。</p>
-<p>  冗余的数据主要有：</p>
-<ul>
-<li>空间冗余</li>
-<li>时间冗余</li>
-<li>结构冗余</li>
-<li>信息熵冗余</li>
-<li>…</li>
-</ul>
-</li>
-<li><p>视觉冗余</p>
-<p>  人眼的一些特性比如亮度辨别阈值，视觉阈值，对亮度和色度的敏感度不同，使得在编码的时候引入适量的误差，也不会被察觉出来。可以利用人眼的视觉特性，以一定的客观失真换取数据压缩。这种压缩属于<strong>有损压缩</strong>。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>数据冗余主要有哪些，分别应该怎样理解？</strong></p>
-<ul>
-<li><p>空间冗余</p>
-<p>  一幅图像中，同一景色的表面采样点往往具有着空间连贯性。也就是说视频图像在水平方向相邻像素之间、垂直方向相邻像素点之间的变化一般都很小，存在着极强的空间相关性。</p>
-<p>  被离散数字量采样表示以后，这种空间连贯性就会产生一定的空间冗余。</p>
-<p>  规则物体和规则背景的表面物理特性都具有相关性，也就是说某些区域中所有点的光强和色彩以及饱和度都是相同的，因此数据有很大的空间冗余。常称为帧内相关性。</p>
-<p>  <img src="https://i.loli.net/2019/01/28/5c4e94c5011b1.png" alt="TIM截图20190128133529.png"></p>
-</li>
-<li><p>时间冗余</p>
-<p>  视频是一些列连续的画面，但是在相邻帧或者相邻画面中，在对应位置的像素之间，亮度和色度信息存在着极强的相关性（如图），前后帧有着大量重复的地方，这就形成了时间冗余。</p>
-<p>  <img src="https://i.loli.net/2019/01/28/5c4e97ed6c038.png" alt="TIM截图20190128134747.png"></p>
-</li>
-<li><p>信息熵冗余</p>
-<p>  又称为符号冗余。信息熵指的是一组数据携带的平均信息量。</p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p><strong>视觉冗余主要有哪些，分别应该怎样理解？</strong></p>
-<p>  事实表明，人类的视觉系统对于图像的敏感性是非均匀和非线性的，它并不能感知图像的所有变化，对视觉不敏感的信息可以适当地舍弃。然而，在记录原始的图像数据时，通常假定视觉系统是线性的和均匀的，对视觉敏感和不敏感的部分同等对待，从而产生了比理想编码(即把视觉敏感和不敏感的部分区分开来编码)更多的数据，当某些变化不能被视觉所感知，则忽略这些变化，我们仍认为图像是完好的。<strong>人类视觉系统的一般分辨能力估计为26灰度等级，而一般图像的量化采用28灰度等级。这些对视觉不敏感的数据，并不能对增加图象相对于人眼清晰度作出贡献，而被认为是多余的数据，这就是视觉冗余度。</strong></p>
-<p>  通过对人类视觉进行大量实验，发现了以下的视觉非均匀特性：视觉系统对图像的亮度和色彩度的敏感性相差很大。随着亮度的增加，视觉系统对量化误差的敏感度降低。这是由于人眼的辨别能力与物体周围的背景亮度成反比。<strong>由此说明：在高亮度区，灰度值的量化可以更粗糙一些。人眼的视觉系统把图像的边缘和非边缘区域分开来处理，这是将图像分成非边缘区域和边缘区域分别进行编码的主要依据</strong>。人类的视觉系统总是把视网膜上的图像分解成若干个空间有向的频率通道后再进一步处理。</p>
-<p>  同时，<strong>人眼对低频信号比对高频信号敏感；对静止图象比对运动图象敏感；对图象中水平和垂直线条比对斜线条敏感</strong>。</p>
-<p>  压缩视觉冗余度就是<strong>去掉那些相对人眼而言是看不到的或可有可无的图象数据，利用人眼的视觉特性进行压缩。</strong></p>
-</li>
-</ul>
-<p>数字视频信号的压缩正是基于上述两种条件，使得视频数据量得以极大的压缩，有利于传输和存储。一般的数字视频压缩编码方法都是<strong>混合编码</strong>，即将<strong>变换编码(Transform Coding)</strong>，<strong>运动估计(Motion Estimation)</strong>和<strong>运动补偿(Motion Compensation)</strong>，以及<strong>熵编码</strong>三种方式相结合来进行压缩编码。</p>
-<p>通常使用变换编码来消去除图像的帧内冗余，用运动估计和运动补偿来去除图像的帧间冗余，用熵编码来进一步提高压缩的效率。</p>
-<p><strong>整理自 雷霄骅 的Blog <a href="https://blog.csdn.net/leixiaohua1020" target="_blank" rel="noopener">https://blog.csdn.net/leixiaohua1020</a></strong></p>
-
+        <p>如图,某层卷积层输入数据大小为$32\times 32$,通道数为$3$。卷积层有四个kernel,kernel大小为$5\times 5$,$3$个通道,kernel数量是$4$.</p>
+<p>假设卷积步长$stride=1$,,$pading=0$,特征图的大小为$28\times 28$(${(32-5)}\div 1 + 1 = 28$),四个卷积核所以有$4$张feature-map。</p>
+<p><img src="https://i.loli.net/2019/02/08/5c5d3b27c8dea.bmp" alt="20190208160628.bmp"></p>
+<p>参数的数量:</p>
+<p>在一个通道的情况下,在卷积过程中,每个卷积核都需要$5\times 5个参数$</p>
+<p><img src="https://i.loli.net/2019/02/08/5c5d415be0538.bmp" alt="TIM截图20190208164357.bmp"></p>
+<p>那么在三个通道的情况下,每个卷积核都需要$5\times 5\times 3+1个参数$,其中1是偏置$bias$,$4$个卷积核的参数数量为$5\times 5\times 3\times 4+3=303$。</p>
+<p><strong>放到一般情况下：</strong></p>
+<p>假设：</p>
+<p>输入大小为$N\times N$,通道为$C$, $padding=P$</p>
+<p>$kernel$大小为$F\times F$,共$M$个卷积核,卷积核也是$C$个通道</p>
+<p>卷积步长$stride=S$</p>
+<p><img src="https://i.loli.net/2019/02/08/5c5d441c481de.bmp" alt="TIM截图20190208165541.bmp"></p>
+<p>则单个通道feature-map的大小为</p>
+<script type="math/tex; mode=display">
+    (\frac{N-F}{S} + 1) \times   (\frac{N-F}{S} + 1)</script><p>这个卷积层参数的数量为：</p>
+<script type="math/tex; mode=display">
+    F\times F \times C \times M +  C = C(F^2M+1)</script>
       
     </div>
 
@@ -513,9 +484,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/编解码/" rel="tag"># 编解码</a>
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
           
-            <a href="/tags/音视频/" rel="tag"># 音视频</a>
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/卷积神经网络/" rel="tag"># 卷积神经网络</a>
           
         </div>
       
@@ -528,8 +503,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/28/深度学习：神经网络参数的反向传播算法/" rel="next" title="深度学习：神经网络参数的反向传播算法">
-                <i class="fa fa-chevron-left"></i> 深度学习：神经网络参数的反向传播算法
+              <a href="/2019/02/07/基于深度卷积网络的超分辨率重建(SRCNN)/" rel="next" title="基于深度卷积网络的超分辨率重建(SRCNN)">
+                <i class="fa fa-chevron-left"></i> 基于深度卷积网络的超分辨率重建(SRCNN)
               </a>
             
           </div>
@@ -537,10 +512,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/01/29/JPEG编码原理简介/" rel="prev" title="JPEG编码原理简介">
-                JPEG编码原理简介 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
