@@ -111,7 +111,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/02/09/5c5ed5ac6d833.bmp">
 <meta property="og:image" content="https://i.loli.net/2019/02/09/5c5ed61737251.bmp">
 <meta property="og:image" content="https://i.loli.net/2019/02/09/5c5ed70e30b84.bmp">
-<meta property="og:updated_time" content="2019-02-09T15:31:37.888Z">
+<meta property="og:updated_time" content="2019-02-09T15:51:08.926Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FSRCNN：加速基于深度卷积网络的超分辨率重建">
 <meta name="twitter:description" content="FSRCNN简介在之前的博客《SRCNN：基于深度卷积网络的超分辨率重建》/)中，我们讨论了Chao Dong的文章《Learning a Deep Convolutional Network for Image Super-Resolution》,SRCNN开创性地将神经网络技术用于超分辨率重建。 在SRCNN发布后，Chao Dong等再次发布了新的文章：《Accelerating the S">
@@ -391,7 +391,7 @@
                 
               
 
-              <time title="Created: 2019-02-09 14:00:07 / Modified: 23:31:37" itemprop="dateCreated datePublished" datetime="2019-02-09T14:00:07+08:00">2019-02-09</time>
+              <time title="Created: 2019-02-09 14:00:07 / Modified: 23:51:08" itemprop="dateCreated datePublished" datetime="2019-02-09T14:00:07+08:00">2019-02-09</time>
             
 
             
@@ -489,9 +489,9 @@
 <p>filter数量$s$设置为<strong>远远小于</strong>Feature extraction（特征提取层)的filter数量$d$以达到收缩变量的目的。</p>
 <p>而通道数量设置为Feature extraction（特征提取层)的filter数量$d$。</p>
 <p>所以这层表示为$Conv(1,s,d)$</p>
-<h3 id="Non-linear-mapping（若干个非线性变换层）"><a href="#Non-linear-mapping（若干个非线性变换层）" class="headerlink" title="Non-linear mapping（若干个非线性变换层）"></a>Non-linear mapping（若干个非线性变换层）</h3><p>在SRCNN中只有一个线性变换层，并且filter大小为较大的$5\times5$，我们为了减少计算量的同时保证性能，我们减少了filter的大小为$3\times1$,将非线性变换层变深。</p>
+<h3 id="Non-linear-mapping（若干个非线性变换层）"><a href="#Non-linear-mapping（若干个非线性变换层）" class="headerlink" title="Non-linear mapping（若干个非线性变换层）"></a>Non-linear mapping（若干个非线性变换层）</h3><p>在SRCNN中只有一个线性变换层，并且filter大小为较大的$5\times5$，我们为了减少计算量的同时保证性能，我们减少了filter的大小为$3\times3$,将非线性变换层变深。</p>
 <p>所有映射层都包含相同数量的filter和channel设为s。</p>
-<p>所以这层表示为$Conv(1,s,s)$</p>
+<p>所以这层表示为$Conv(3,s,s)$</p>
 <h3 id="Expanding（扩展层）"><a href="#Expanding（扩展层）" class="headerlink" title="Expanding（扩展层）"></a>Expanding（扩展层）</h3><p>扩展层类似于收缩层的逆过程，参数收缩操作减少了LR特征尺寸的数量，以便提高计算效率。但是，如果我们直接从中生成HR图像，最终修复效果会比较差。所以这一层我们需要将特征维度升高，采用了和收缩层相同的filter大小为1。</p>
 <p>所以这层表示为$Conv(1,d,s)$</p>
 <h3 id="Deconvolution（反卷积层）"><a href="#Deconvolution（反卷积层）" class="headerlink" title="Deconvolution（反卷积层）"></a>Deconvolution（反卷积层）</h3><p><img src="https://i.loli.net/2019/02/09/5c5ed2050d632.bmp" alt="TIM截图20190209211329.bmp"></p>
