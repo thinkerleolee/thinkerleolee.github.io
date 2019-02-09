@@ -107,7 +107,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/02/08/5c5d3b27c8dea.bmp">
 <meta property="og:image" content="https://i.loli.net/2019/02/08/5c5d415be0538.bmp">
 <meta property="og:image" content="https://i.loli.net/2019/02/08/5c5d441c481de.bmp">
-<meta property="og:updated_time" content="2019-02-08T09:23:27.882Z">
+<meta property="og:updated_time" content="2019-02-09T08:21:09.933Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="卷积神经网络中卷积层参数数量的计算">
 <meta name="twitter:description" content="如图,某层卷积层输入数据大小为$32\times 32$,通道数为$3$。卷积层有四个kernel,kernel大小为$5\times 5$,$3$个通道,kernel数量是$4$. 假设卷积步长$stride=1$,,$pading=0$,特征图的大小为$28\times 28$(${(32-5)}\div 1 + 1 = 28$),四个卷积核所以有$4$张feature-map。  参数的数量">
@@ -387,12 +387,24 @@
                 
               
 
-              <time title="Created: 2019-02-08 10:20:07 / Modified: 17:23:27" itemprop="dateCreated datePublished" datetime="2019-02-08T10:20:07+08:00">2019-02-08</time>
+              <time title="Created: 2019-02-08 10:20:07" itemprop="dateCreated datePublished" datetime="2019-02-08T10:20:07+08:00">2019-02-08</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-09 16:21:09" itemprop="dateModified" datetime="2019-02-09T16:21:09+08:00">2019-02-09</time>
               
             
           </span>
@@ -450,7 +462,7 @@
 <p>参数的数量:</p>
 <p>在一个通道的情况下,在卷积过程中,每个卷积核都需要$5\times 5个参数$</p>
 <p><img src="https://i.loli.net/2019/02/08/5c5d415be0538.bmp" alt="TIM截图20190208164357.bmp"></p>
-<p>那么在三个通道的情况下,每个卷积核都需要$5\times 5\times 3+1个参数$,其中1是偏置$bias$,$4$个卷积核的参数数量为$5\times 5\times 3\times 4+3=303$。</p>
+<p>那么在三个通道的情况下,每个卷积核都需要$5\times 5\times 3+1个参数$,其中1是偏置$bias$，三个通道共享一个偏置,$4$个卷积核的参数数量为$5\times 5\times 3\times 4+4=304$。</p>
 <p><strong>放到一般情况下：</strong></p>
 <p>假设：</p>
 <p>输入大小为$N\times N$,通道为$C$, $padding=P$</p>
@@ -461,7 +473,7 @@
 <script type="math/tex; mode=display">
     (\frac{N-F}{S} + 1) \times   (\frac{N-F}{S} + 1)</script><p>这个卷积层参数的数量为：</p>
 <script type="math/tex; mode=display">
-    F\times F \times C \times M +  C = C(F^2M+1)</script>
+    F\times F \times C \times M +  M = M(F^2C+1)</script>
       
     </div>
 
