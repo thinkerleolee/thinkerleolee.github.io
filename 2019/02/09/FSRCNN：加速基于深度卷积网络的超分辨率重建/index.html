@@ -96,15 +96,26 @@
 
 
 
-  <meta name="keywords" content="深度学习,计算机视觉,图像处理">
+  <meta name="description" content="FSRCNN简介在之前的博客《SRCNN：基于深度卷积网络的超分辨率重建》/)中，我们讨论了Chao Dong的文章《Learning a Deep Convolutional Network for Image Super-Resolution》,SRCNN开创性地将神经网络技术用于超分辨率重建。 在SRCNN发布后，Chao Dong等再次发布了新的文章：《Accelerating the S">
+<meta name="keywords" content="深度学习,计算机视觉,图像处理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="FSRCNN：加速基于深度卷积网络的超分辨率重建">
 <meta property="og:url" content="https://thinkerleolee.github.io/2019/02/09/FSRCNN：加速基于深度卷积网络的超分辨率重建/index.html">
 <meta property="og:site_name" content="Thinkerleo">
+<meta property="og:description" content="FSRCNN简介在之前的博客《SRCNN：基于深度卷积网络的超分辨率重建》/)中，我们讨论了Chao Dong的文章《Learning a Deep Convolutional Network for Image Super-Resolution》,SRCNN开创性地将神经网络技术用于超分辨率重建。 在SRCNN发布后，Chao Dong等再次发布了新的文章：《Accelerating the S">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-09T06:45:45.466Z">
+<meta property="og:image" content="https://i.loli.net/2019/02/09/5c5ec3dc45fe5.bmp">
+<meta property="og:image" content="https://i.loli.net/2019/02/09/5c5ec83b83ab5.bmp">
+<meta property="og:image" content="https://i.loli.net/2019/02/09/5c5ed2050d632.bmp">
+<meta property="og:image" content="https://i.loli.net/2019/02/09/5c5ec83b83ab5.bmp">
+<meta property="og:image" content="https://i.loli.net/2019/02/09/5c5ed5ac6d833.bmp">
+<meta property="og:image" content="https://i.loli.net/2019/02/09/5c5ed61737251.bmp">
+<meta property="og:image" content="https://i.loli.net/2019/02/09/5c5ed70e30b84.bmp">
+<meta property="og:updated_time" content="2019-02-09T15:31:37.888Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FSRCNN：加速基于深度卷积网络的超分辨率重建">
+<meta name="twitter:description" content="FSRCNN简介在之前的博客《SRCNN：基于深度卷积网络的超分辨率重建》/)中，我们讨论了Chao Dong的文章《Learning a Deep Convolutional Network for Image Super-Resolution》,SRCNN开创性地将神经网络技术用于超分辨率重建。 在SRCNN发布后，Chao Dong等再次发布了新的文章：《Accelerating the S">
+<meta name="twitter:image" content="https://i.loli.net/2019/02/09/5c5ec3dc45fe5.bmp">
 
 
 
@@ -380,7 +391,7 @@
                 
               
 
-              <time title="Created: 2019-02-09 14:00:07 / Modified: 14:45:45" itemprop="dateCreated datePublished" datetime="2019-02-09T14:00:07+08:00">2019-02-09</time>
+              <time title="Created: 2019-02-09 14:00:07 / Modified: 23:31:37" itemprop="dateCreated datePublished" datetime="2019-02-09T14:00:07+08:00">2019-02-09</time>
             
 
             
@@ -437,7 +448,68 @@
       
 
       
-        
+        <h2 id="FSRCNN简介"><a href="#FSRCNN简介" class="headerlink" title="FSRCNN简介"></a>FSRCNN简介</h2><p>在之前的博客<a href="https://thinkerleolee.github.io/2019/02/07/%E5%9F%BA%E4%BA%8E%E6%B7%B1%E5%BA%A6%E5%8D%B7%E7%A7%AF%E7%BD%91%E7%BB%9C%E7%9A%84%E8%B6%85%E5%88%86%E8%BE%A8%E7%8E%87%E9%87%8D%E5%BB%BA(SRCNN">《SRCNN：基于深度卷积网络的超分辨率重建》</a>/)中，我们讨论了Chao Dong的文章《Learning a Deep Convolutional Network for Image Super-Resolution》,SRCNN开创性地将神经网络技术用于超分辨率重建。</p>
+<p>在SRCNN发布后，Chao Dong等再次发布了新的文章：《Accelerating the Super-Resolution Convolutional Neural Network》<a href="http://mmlab.ie.cuhk.edu.hk/projects/FSRCNN.html" target="_blank" rel="noopener">http://mmlab.ie.cuhk.edu.hk/projects/FSRCNN.html</a>，这篇文章提出了FSRCNN网络模型对SRCNN进行了改进。</p>
+<p>FSRCNN主要有三个方面的改进：</p>
+<ul>
+<li><p><strong>FSRCNN在网络末端加入了反卷积层，可以直接从低分辨率图像转化为高分辨率图像。</strong></p>
+</li>
+<li><p><strong>FSRCNN缩小了卷积核的大小，简化了卷积层的参数数量，减少了图像处理的时间复杂度。</strong></p>
+</li>
+<li><p><strong>针对不同的缩放比例，不用大幅修改网络结构。可以复用中间的卷积层，只修改末端的反卷积层重新训练即可。</strong></p>
+</li>
+</ul>
+<p>如图,相较于SRCNN,FSRCNN在性能和时间上都有了进步，而简化版的FSRCNN：FSRCNN-s在处理速度上更是达到了CPU实时的处理能力（43.5fps）。</p>
+<p><img src="https://i.loli.net/2019/02/09/5c5ec3dc45fe5.bmp" alt="20190209201143.bmp"></p>
+<h2 id="问题提出"><a href="#问题提出" class="headerlink" title="问题提出"></a>问题提出</h2><p>SRCNN为什么慢, 主要是两方面的原因</p>
+<ul>
+<li><p>我们输入网络的图像是BiCubic后的图像，输入过多，产生了很多的冗余计算。</p>
+</li>
+<li><p>非线性映射中参数过多</p>
+</li>
+</ul>
+<h2 id="FSRCNN网络架构"><a href="#FSRCNN网络架构" class="headerlink" title="FSRCNN网络架构"></a>FSRCNN网络架构</h2><p>作者依照处理功能的不同，将FSRCNN网络分为五个层次：</p>
+<ul>
+<li>Feature extraction（特征提取层）</li>
+<li>Shrinking（参数收缩层）</li>
+<li>Non-linear mapping（若干个非线性变换层）</li>
+<li>Expanding（扩展层，可以看作是参数收缩层的反作用层）</li>
+<li>Deconvolution（反卷积层，生成最终的HR图像）</li>
+</ul>
+<p>如图为SRCNN和FSRCNN网络结构的对比：</p>
+<p><img src="https://i.loli.net/2019/02/09/5c5ec83b83ab5.bmp" alt="20190209203140.bmp"></p>
+<p>我们设每个卷积层表示为$Conv(f_i,n_i,c_i)$,$f_i$为filter的尺寸，$n_i$表示为filter的数量，$c_i$表示为filter的通道数量。</p>
+<h3 id="Feature-extraction（特征提取层"><a href="#Feature-extraction（特征提取层" class="headerlink" title="Feature extraction（特征提取层)"></a>Feature extraction（特征提取层)</h3><p>这个部分与SRCNN中的第一层较为相似，但是在FSRCNN中，由于输入的图像是原始的LR图像，所以将$5\times5$的卷积核作为特征提取的感知野的大小足矣（在SRCNN中因为预处理中将原始图像双三次插值到HR大小，所以卷积核大小为$9\times9$）。</p>
+<p>对于channel的数量，我们仍然和SRCNN遵循一致设置为1。</p>
+<p>设置channel为1，然后我们只需要确定filter的数目。</p>
+<p>从另一个角度来看，filter的数量可以看作是LR图像的特征维数，作为我们的可控变量$d$。</p>
+<p>所以这层表示为$Conv(5,d,1)$</p>
+<h3 id="Shrinking（参数收缩层）"><a href="#Shrinking（参数收缩层）" class="headerlink" title="Shrinking（参数收缩层）"></a>Shrinking（参数收缩层）</h3><p>这一层可以看作是对上一步得到的很多特征的降维过程，目的是减少参数与计算量。</p>
+<p>我们将filter的大小设置为$1\times1$。</p>
+<p>filter数量$s$设置为<strong>远远小于</strong>Feature extraction（特征提取层)的filter数量$d$以达到收缩变量的目的。</p>
+<p>而通道数量设置为Feature extraction（特征提取层)的filter数量$d$。</p>
+<p>所以这层表示为$Conv(1,s,d)$</p>
+<h3 id="Non-linear-mapping（若干个非线性变换层）"><a href="#Non-linear-mapping（若干个非线性变换层）" class="headerlink" title="Non-linear mapping（若干个非线性变换层）"></a>Non-linear mapping（若干个非线性变换层）</h3><p>在SRCNN中只有一个线性变换层，并且filter大小为较大的$5\times5$，我们为了减少计算量的同时保证性能，我们减少了filter的大小为$3\times1$,将非线性变换层变深。</p>
+<p>所有映射层都包含相同数量的filter和channel设为s。</p>
+<p>所以这层表示为$Conv(1,s,s)$</p>
+<h3 id="Expanding（扩展层）"><a href="#Expanding（扩展层）" class="headerlink" title="Expanding（扩展层）"></a>Expanding（扩展层）</h3><p>扩展层类似于收缩层的逆过程，参数收缩操作减少了LR特征尺寸的数量，以便提高计算效率。但是，如果我们直接从中生成HR图像，最终修复效果会比较差。所以这一层我们需要将特征维度升高，采用了和收缩层相同的filter大小为1。</p>
+<p>所以这层表示为$Conv(1,d,s)$</p>
+<h3 id="Deconvolution（反卷积层）"><a href="#Deconvolution（反卷积层）" class="headerlink" title="Deconvolution（反卷积层）"></a>Deconvolution（反卷积层）</h3><p><img src="https://i.loli.net/2019/02/09/5c5ed2050d632.bmp" alt="TIM截图20190209211329.bmp"></p>
+<p>对于卷积层我们大小为$n$的输入，经步频$stride=k$的卷积层处理，输出的特征大小为$n/k$。</p>
+<p>相反对于反卷积层，我们大小为$n$的输入，经步频$stride=k$的卷积层处理，输出的特征大小为$n*k$。</p>
+<p>这层我们应该采用$9×9$的filter，与SRCNN的第一层一致。</p>
+<p>所以这层表示为$DeConv(9,1,s)$</p>
+<h2 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h2><p>在FSRCNN中我们采用了MSE代价函数和PReLU激活函数，我们选择PReLU主要是为了避免<br>由RELU中的零梯度引起的“dead feature”（有待后续了解）,所以整个网络表示为</p>
+<script type="math/tex; mode=display">
+Conv(5, d, 1) − PReLU − Conv(1, s, d) − PReLU − m×Conv(3, s, s) − PReLU − Conv(1, d, s) − PReLU − DeConv(9, 1, d)</script><p>整个网络呈现出有趣的由小到大的”沙漏形”：</p>
+<p><img src="https://i.loli.net/2019/02/09/5c5ec83b83ab5.bmp" alt="20190209203140.bmp"></p>
+<p>FSRCNN整个的计算复杂度为：</p>
+<p><img src="https://i.loli.net/2019/02/09/5c5ed5ac6d833.bmp" alt="TIM截图20190209212841.bmp"></p>
+<p>而SRCNN整个的计算复杂度为：</p>
+<p><img src="https://i.loli.net/2019/02/09/5c5ed61737251.bmp" alt="TIM截图20190209213010.bmp"></p>
+<p>从SRCNN到FSRCNN的结构演进表：</p>
+<p><img src="https://i.loli.net/2019/02/09/5c5ed70e30b84.bmp" alt="TIM截图20190209213503.bmp"></p>
+
       
     </div>
 
@@ -530,8 +602,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -667,6 +748,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FSRCNN简介"><span class="nav-number">1.</span> <span class="nav-text">FSRCNN简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题提出"><span class="nav-number">2.</span> <span class="nav-text">问题提出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FSRCNN网络架构"><span class="nav-number">3.</span> <span class="nav-text">FSRCNN网络架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature-extraction（特征提取层"><span class="nav-number">3.1.</span> <span class="nav-text">Feature extraction（特征提取层)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shrinking（参数收缩层）"><span class="nav-number">3.2.</span> <span class="nav-text">Shrinking（参数收缩层）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-linear-mapping（若干个非线性变换层）"><span class="nav-number">3.3.</span> <span class="nav-text">Non-linear mapping（若干个非线性变换层）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expanding（扩展层）"><span class="nav-number">3.4.</span> <span class="nav-text">Expanding（扩展层）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deconvolution（反卷积层）"><span class="nav-number">3.5.</span> <span class="nav-text">Deconvolution（反卷积层）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整体结构"><span class="nav-number">4.</span> <span class="nav-text">整体结构</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
