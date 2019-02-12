@@ -111,7 +111,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/02/09/5c5ed5ac6d833.bmp">
 <meta property="og:image" content="https://i.loli.net/2019/02/09/5c5ed61737251.bmp">
 <meta property="og:image" content="https://i.loli.net/2019/02/09/5c5ed70e30b84.bmp">
-<meta property="og:updated_time" content="2019-02-10T04:26:04.933Z">
+<meta property="og:updated_time" content="2019-02-12T05:46:54.790Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FSRCNN：加速基于深度卷积网络的超分辨率重建">
 <meta name="twitter:description" content="FSRCNN简介在之前的博客《SRCNN：基于深度卷积网络的超分辨率重建》/)中，我们讨论了Chao Dong的文章《Learning a Deep Convolutional Network for Image Super-Resolution》,SRCNN开创性地将神经网络技术用于超分辨率重建。 在SRCNN发布后，Chao Dong等再次发布了新的文章：《Accelerating the S">
@@ -408,7 +408,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-10 12:26:04" itemprop="dateModified" datetime="2019-02-10T12:26:04+08:00">2019-02-10</time>
+                <time title="Modified: 2019-02-12 13:46:54" itemprop="dateModified" datetime="2019-02-12T13:46:54+08:00">2019-02-12</time>
               
             
           </span>
@@ -521,6 +521,19 @@ Conv(5, d, 1) − PReLU − Conv(1, s, d) − PReLU − m×Conv(3, s, s) − PRe
 <p><img src="https://i.loli.net/2019/02/09/5c5ed61737251.bmp" alt="TIM截图20190209213010.bmp"></p>
 <p>从SRCNN到FSRCNN的结构演进表：</p>
 <p><img src="https://i.loli.net/2019/02/09/5c5ed70e30b84.bmp" alt="TIM截图20190209213503.bmp"></p>
+<h2 id="训练过程与参数调整"><a href="#训练过程与参数调整" class="headerlink" title="训练过程与参数调整"></a>训练过程与参数调整</h2><h3 id="训练集获取"><a href="#训练集获取" class="headerlink" title="训练集获取"></a>训练集获取</h3><p>91-image训练集常常用来训练SR算法，但是深度学习模型往往在大数据训练集下才会有最好的发挥，所以作者贡献了新的训练集set-100，有100张训练图片。</p>
+<p>为了扩充训练数据，我们还采用了两种方式：</p>
+<p>1、<strong>缩放</strong>，将每个图像0.9,0,8,0.7和0.6倍缩小</p>
+<p>2、<strong>旋转</strong>，每个图像以90度，180度和270度旋转</p>
+<p>通过这两种方式我们将会有$5×4-1 = 19$倍的训练数据。</p>
+<h3 id="训练数据预处理"><a href="#训练数据预处理" class="headerlink" title="训练数据预处理"></a>训练数据预处理</h3><p>假设，我们的缩放因数是$n$,我们首先将HR训练图片下采样$n$倍到LR图像。</p>
+<p>然后我们用步频$stride$将LR图像裁剪成一组$f_{sub}\times f_{sub}$的子图。</p>
+<p>相应的HR子图也是通过同一方式得到的一组$(n \times f_{sub})\times (n \times f_{sub})$大小的子图。</p>
+<p>作者表示padding的设置对最终表现影响不大，所以统一设为$pading=0$。</p>
+<p>作者使用caffe包训练模型时，反卷积层生成的大小为$(nf_{sub}-n+1)^2$,而不是$(nf_{sub})^2$,所以我们还得在HR子图像上裁剪$n-1$像素的border。</p>
+<h3 id="训练参数"><a href="#训练参数" class="headerlink" title="训练参数"></a>训练参数</h3><p>学习率一开始作者将卷积层学习率设为$10^{-3}$<br>,反卷积层学习率设为$10^{-3}$,但在微调过程中将所有层的学习率降低了一半。</p>
+<p>对于初始化，卷积层采用了为PReLU设计的方法初始化。</p>
+<p>没有激活函数的反卷积层，使用高斯随机初始化均值为0，标准差0.001）</p>
 
       
     </div>
@@ -771,7 +784,7 @@ Conv(5, d, 1) − PReLU − Conv(1, s, d) − PReLU − m×Conv(3, s, s) − PRe
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FSRCNN简介"><span class="nav-number">1.</span> <span class="nav-text">FSRCNN简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题提出"><span class="nav-number">2.</span> <span class="nav-text">问题提出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FSRCNN网络架构"><span class="nav-number">3.</span> <span class="nav-text">FSRCNN网络架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature-extraction（特征提取层"><span class="nav-number">3.1.</span> <span class="nav-text">Feature extraction（特征提取层)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shrinking（参数收缩层）"><span class="nav-number">3.2.</span> <span class="nav-text">Shrinking（参数收缩层）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-linear-mapping（若干个非线性变换层）"><span class="nav-number">3.3.</span> <span class="nav-text">Non-linear mapping（若干个非线性变换层）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expanding（扩展层）"><span class="nav-number">3.4.</span> <span class="nav-text">Expanding（扩展层）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deconvolution（反卷积层）"><span class="nav-number">3.5.</span> <span class="nav-text">Deconvolution（反卷积层）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整体结构"><span class="nav-number">4.</span> <span class="nav-text">整体结构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#FSRCNN简介"><span class="nav-number">1.</span> <span class="nav-text">FSRCNN简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题提出"><span class="nav-number">2.</span> <span class="nav-text">问题提出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FSRCNN网络架构"><span class="nav-number">3.</span> <span class="nav-text">FSRCNN网络架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Feature-extraction（特征提取层"><span class="nav-number">3.1.</span> <span class="nav-text">Feature extraction（特征提取层)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shrinking（参数收缩层）"><span class="nav-number">3.2.</span> <span class="nav-text">Shrinking（参数收缩层）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Non-linear-mapping（若干个非线性变换层）"><span class="nav-number">3.3.</span> <span class="nav-text">Non-linear mapping（若干个非线性变换层）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expanding（扩展层）"><span class="nav-number">3.4.</span> <span class="nav-text">Expanding（扩展层）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deconvolution（反卷积层）"><span class="nav-number">3.5.</span> <span class="nav-text">Deconvolution（反卷积层）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整体结构"><span class="nav-number">4.</span> <span class="nav-text">整体结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练过程与参数调整"><span class="nav-number">5.</span> <span class="nav-text">训练过程与参数调整</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#训练集获取"><span class="nav-number">5.1.</span> <span class="nav-text">训练集获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练数据预处理"><span class="nav-number">5.2.</span> <span class="nav-text">训练数据预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练参数"><span class="nav-number">5.3.</span> <span class="nav-text">训练参数</span></a></li></ol></li></ol></div>
             
 
           </div>
