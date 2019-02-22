@@ -96,23 +96,26 @@
 
 
 
-  <meta name="description" content="在FSRCNN中，实现端到端的超分辨率中的一个重要过程就是反卷积。如何理解反卷过程呢？我们还得从卷积过程说起。 举个例子：   上图中，输入为$4\times 4$，卷积核大小为$3\times 3$，$padding=0$，$stride=1$。 输出feature-map大小为$2\times 2$。 将输入矩阵展开为16维向量，记作$x$ 输出矩阵可以展开为4维向量，记作$y$ 卷积运算可以">
+  <meta name="description" content="在FSRCNN中，实现端到端的超分辨率中的一个重要过程就是反卷积。如何理解反卷过程呢？我们还得从卷积过程说起。 卷积过程举个例子：   上图中，输入为$4\times 4$，卷积核大小为$3\times 3$，$padding=0$，$stride=1$。 输出feature-map大小为$2\times 2$。 将输入矩阵展开为16维向量，记作$x$ 输出矩阵可以展开为4维向量，记作$y$ 卷积">
 <meta name="keywords" content="深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习：理解反卷积">
 <meta property="og:url" content="https://thinkerleolee.github.io/2019/02/22/深度学习：理解反卷积/index.html">
 <meta property="og:site_name" content="Thinkerleo">
-<meta property="og:description" content="在FSRCNN中，实现端到端的超分辨率中的一个重要过程就是反卷积。如何理解反卷过程呢？我们还得从卷积过程说起。 举个例子：   上图中，输入为$4\times 4$，卷积核大小为$3\times 3$，$padding=0$，$stride=1$。 输出feature-map大小为$2\times 2$。 将输入矩阵展开为16维向量，记作$x$ 输出矩阵可以展开为4维向量，记作$y$ 卷积运算可以">
+<meta property="og:description" content="在FSRCNN中，实现端到端的超分辨率中的一个重要过程就是反卷积。如何理解反卷过程呢？我们还得从卷积过程说起。 卷积过程举个例子：   上图中，输入为$4\times 4$，卷积核大小为$3\times 3$，$padding=0$，$stride=1$。 输出feature-map大小为$2\times 2$。 将输入矩阵展开为16维向量，记作$x$ 输出矩阵可以展开为4维向量，记作$y$ 卷积">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.loli.net/2019/02/22/5c70045a4c002.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/23/5c701cbb435d8.bmp">
 <meta property="og:image" content="https://i.loli.net/2019/02/23/5c701cf15cd25.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/23/5c701cc5655a9.bmp">
+<meta property="og:image" content="https://i.loli.net/2019/02/23/5c70213bd7a4d.png">
 <meta property="og:image" content="https://i.loli.net/2019/02/23/5c701cc37c46a.bmp">
-<meta property="og:updated_time" content="2019-02-22T16:14:26.733Z">
+<meta property="og:image" content="https://i.loli.net/2019/02/23/5c7022d42e854.png">
+<meta property="og:image" content="https://i.loli.net/2019/02/23/5c7022d444f8f.png">
+<meta property="og:updated_time" content="2019-02-22T16:28:35.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习：理解反卷积">
-<meta name="twitter:description" content="在FSRCNN中，实现端到端的超分辨率中的一个重要过程就是反卷积。如何理解反卷过程呢？我们还得从卷积过程说起。 举个例子：   上图中，输入为$4\times 4$，卷积核大小为$3\times 3$，$padding=0$，$stride=1$。 输出feature-map大小为$2\times 2$。 将输入矩阵展开为16维向量，记作$x$ 输出矩阵可以展开为4维向量，记作$y$ 卷积运算可以">
+<meta name="twitter:description" content="在FSRCNN中，实现端到端的超分辨率中的一个重要过程就是反卷积。如何理解反卷过程呢？我们还得从卷积过程说起。 卷积过程举个例子：   上图中，输入为$4\times 4$，卷积核大小为$3\times 3$，$padding=0$，$stride=1$。 输出feature-map大小为$2\times 2$。 将输入矩阵展开为16维向量，记作$x$ 输出矩阵可以展开为4维向量，记作$y$ 卷积">
 <meta name="twitter:image" content="https://i.loli.net/2019/02/22/5c70045a4c002.png">
 
 
@@ -406,7 +409,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-02-23 00:14:26" itemprop="dateModified" datetime="2019-02-23T00:14:26+08:00">2019-02-23</time>
+                <time title="Modified: 2019-02-23 00:28:35" itemprop="dateModified" datetime="2019-02-23T00:28:35+08:00">2019-02-23</time>
               
             
           </span>
@@ -459,7 +462,7 @@
 
       
         <p>在FSRCNN中，实现端到端的超分辨率中的一个重要过程就是<strong>反卷积</strong>。如何理解反卷过程呢？我们还得从卷积过程说起。</p>
-<p>举个例子：</p>
+<h2 id="卷积过程"><a href="#卷积过程" class="headerlink" title="卷积过程"></a>卷积过程</h2><p>举个例子：</p>
 <p><img src="https://i.loli.net/2019/02/22/5c70045a4c002.png" alt="3a18904d07.png"></p>
 <p><img src="https://i.loli.net/2019/02/23/5c701cbb435d8.bmp" alt="TIM截图20190222222900.bmp"></p>
 <p>上图中，输入为$4\times 4$，卷积核大小为$3\times 3$，$padding=0$，$stride=1$。</p>
@@ -471,8 +474,17 @@
 <p><img src="https://i.loli.net/2019/02/23/5c701cf15cd25.png" alt="fcf85c4e66326ad5279563b480a80ae1_hd.png"></p>
 <p>卷积运算$y=Cx$表示为：</p>
 <p><img src="https://i.loli.net/2019/02/23/5c701cc5655a9.bmp" alt="TIM截图20190222235757.bmp"></p>
+<h2 id="反卷积过程"><a href="#反卷积过程" class="headerlink" title="反卷积过程"></a>反卷积过程</h2><p>反卷积时，图示为：<br>输入为$2\times 2$，<br>卷积核大小为$3\times 3$，$padding=0$，$stride=1$。</p>
+<p>将输入矩阵展开为4维向量，记作$y^{‘}$</p>
+<p>输出矩阵可以展开为16维向量，记作$x^{‘}$</p>
+<p><img src="https://i.loli.net/2019/02/23/5c70213bd7a4d.png" alt="v2-cfa18dbc6e6dc30b246738e819468ae6_hd.png"></p>
 <p><strong>而所谓反/逆卷积运算其实就是</strong>$C^Ty^{‘}=x^{‘}$</p>
 <p><img src="https://i.loli.net/2019/02/23/5c701cc37c46a.bmp" alt="TIM截图20190222235554.bmp"></p>
+<p>那看下$stride=2$的时候</p>
+<p>卷积：</p>
+<p><img src="https://i.loli.net/2019/02/23/5c7022d42e854.png" alt="v2-5dd3a09e8368884b629e9cb7279f311e_hd.png"><br>反卷积：</p>
+<p><img src="https://i.loli.net/2019/02/23/5c7022d444f8f.png" alt="v2-bf9fdb42390762b2f7c49d0024dcbc90_hd.png"></p>
+<p>由上可知，反卷积只能还原shape大小，不能还原原值。</p>
 <p>参考<a href="https://www.zhihu.com/question/43609045" target="_blank" rel="noopener">https://www.zhihu.com/question/43609045</a></p>
 
       
@@ -563,8 +575,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -700,6 +721,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#卷积过程"><span class="nav-number">1.</span> <span class="nav-text">卷积过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反卷积过程"><span class="nav-number">2.</span> <span class="nav-text">反卷积过程</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
